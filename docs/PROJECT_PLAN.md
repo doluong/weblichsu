@@ -103,7 +103,9 @@ Trạng thái: Bước 2 (khung giao diện) gộp một commit gồm S1, phần
 
 Bước 3 (Chặng 1-4) đã làm, mỗi nhóm một commit: hàm chấm điểm thuần S3-S7; `shuffle.ts` (S7a); nội dung nguyên văn S9 cho Chặng 1-4; reducer và selectors S8; giao diện và test hành vi S12-S15.
 
-Bước 4 (Chặng 5) đã làm: áp dụng mục L (hộp cảnh báo Chặng 2, xáo lựa chọn Phòng 2-3, bỏ chữ mô tả hiện vật, dấu chấm Tư liệu 2); `cipher.ts`, `wordCount.ts` (S7); trạng thái và kiểm tra hợp lệ Chặng 5 (S16); biểu mẫu 4 bước, màn hình thất bại, thẻ Đại sứ và xuất PNG (S16-S17). Còn lại: test tĩnh mở rộng (S18), workflow GitHub Pages (S19), kiểm tra cuối (S20). Không làm xuất PDF.
+Bước 4 (Chặng 5) đã làm: áp dụng mục L (hộp cảnh báo Chặng 2, xáo lựa chọn Phòng 2-3, bỏ chữ mô tả hiện vật, dấu chấm Tư liệu 2); `cipher.ts`, `wordCount.ts` (S7); trạng thái và kiểm tra hợp lệ Chặng 5 (S16); biểu mẫu 4 bước, màn hình thất bại, thẻ Đại sứ và xuất PNG (S16-S17).
+
+Bước 5 (hoàn thiện) đã làm: ảnh thật thay ảnh giữ chỗ; áp dụng mục N (lời dẫn Chặng 5 bỏ "Bảng Vàng"; không làm PDF); banner ảnh nền bảo tàng ở Phòng 1; test tĩnh mở rộng (S18: danh sách thư viện được duyệt, không thư viện QR/lưu trữ/CDN); workflow GitHub Pages có test cấu trúc (S19); kiểm tra cuối (S20): `npm run typecheck`, `npm test` (261 test), `npm run lint`, `npm run build`, `npm audit` (0 lỗ hổng), `vite preview` + `curl` đường dẫn `/weblichsu/`, và chạy thử toàn luồng 100/100 trên bản build production (không có bảng DEV) đến xuất PNG 1640 x 2268 px, bộ nhớ trình duyệt trống, không có lỗi console. Đã hoàn tất lộ trình S0-S20 trừ các mục không còn áp dụng (PDF).
 
 | Bước | Nội dung | Tiêu chí hoàn thành | Lệnh kiểm tra |
 |---|---|---|---|

@@ -1,6 +1,6 @@
 # Danh mục ảnh - MẬT MÃ VĂN MINH ĐÔNG NAM Á
 
-Mọi ảnh nằm trong thư mục [`public/images/placeholders/`](../public/images/placeholders). Hiện tại đây là các **file giữ chỗ** do chương trình tạo: mỗi file là một mảng màu phẳng khác nhau, không vẽ hay mô phỏng di tích. Mỗi vị trí ảnh có một file riêng và tên file duy nhất.
+Mọi ảnh nằm trong thư mục [`public/images/placeholders/`](../public/images/placeholders). Thư mục giữ tên cũ "placeholders" và các file giữ hậu tố `-placeholder`, nhưng **hiện nay các file này đã là ảnh thật do người dùng cung cấp**, đúng tỷ lệ khung (xem cột "Tỷ lệ"). Mỗi vị trí ảnh có một file riêng và tên file duy nhất.
 
 Đường dẫn ảnh chỉ được khai báo ở một nơi: [`src/config/assets.ts`](../src/config/assets.ts) (mảng `IMAGE_ASSETS`). Mã dựng URL từ `import.meta.env.BASE_URL`, nên đường dẫn đúng cả khi chạy cục bộ (`/weblichsu/images/placeholders/...`) lẫn khi triển khai GitHub Pages ở thư mục con `/weblichsu/`.
 
@@ -33,7 +33,7 @@ Ghi chú:
 | `architecture-ayutthaya-placeholder.jpg` | `public/images/placeholders/architecture-ayutthaya-placeholder.jpg` | Chặng 3, Phòng 3, công trình 3 | Cố đô Ayutthaya (Thái Lan): đầu tượng Phật trong rễ cây hoặc cụm tháp Prang | 16:9 | 1280 x 720 |
 | `architecture-my-son-placeholder.jpg` | `public/images/placeholders/architecture-my-son-placeholder.jpg` | Chặng 3, Phòng 3, công trình 4 | Thánh địa Mỹ Sơn (Việt Nam) | 16:9 | 1280 x 720 |
 | `portrait-default-placeholder.jpg` | `public/images/placeholders/portrait-default-placeholder.jpg` | Chặng 5, ảnh chân dung mặc định trên thẻ (khi học sinh không tải ảnh) | Ảnh chân dung mặc định, không bắt buộc thay | 3:4 | 900 x 1200 |
-| `museum-room-background-placeholder.jpg` | `public/images/placeholders/museum-room-background-placeholder.jpg` | Chặng 3, Phòng 1, ảnh nền (tùy chọn, chưa dùng ở khung hiện tại) | Ảnh một góc bảo tàng, không bắt buộc | 16:9 | 1280 x 720 |
+| `museum-room-background-placeholder.jpg` | `public/images/placeholders/museum-room-background-placeholder.jpg` | Chặng 3, Phòng 1, banner trang trí ở đầu phòng (đã dùng; alt rỗng) | Ảnh một góc bảo tàng, không bắt buộc | 16:9 | 1280 x 720 |
 
 ## Ảnh học sinh tải lên (Chặng 5)
 

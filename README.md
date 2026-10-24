@@ -2,7 +2,7 @@
 
 Website trò chơi giáo dục bằng tiếng Việt gồm 5 chặng (tổng tối đa 100 điểm), xây dựng bằng React + TypeScript + Vite và triển khai miễn phí trên GitHub Pages.
 
-Trạng thái hiện tại: **Cả 5 chặng đã chơi được.** Chặng 1-4 (tương tác, chấm điểm, thông báo, mảnh mật mã, khóa câu trả lời) và Chặng 5 (nhập thông tin, mật mã, hành động bảo tồn 30-50 từ, tạo thẻ Đại sứ, xuất thẻ PNG). Hàm chấm điểm nằm ở `src/game/scoring/`, kiểm tra mật mã và đếm từ ở `src/game/cipher.ts`, `src/game/wordCount.ts`; mỗi phần có unit test riêng.
+Trạng thái hiện tại: **Hoàn thành.** Cả 5 chặng đã chơi được: Chặng 1-4 (tương tác, chấm điểm, thông báo, mảnh mật mã, khóa câu trả lời) và Chặng 5 (nhập thông tin, mật mã, hành động bảo tồn 30-50 từ, tạo thẻ Đại sứ, xuất thẻ PNG). Hàm chấm điểm nằm ở `src/game/scoring/`, kiểm tra mật mã và đếm từ ở `src/game/cipher.ts`, `src/game/wordCount.ts`; mỗi phần có unit test riêng.
 
 Xuất thẻ: dùng thư viện `html-to-image` (MIT) để chụp phần tử thẻ thành PNG ngay trên trình duyệt, không gửi dữ liệu đi đâu. Thẻ có chiều rộng thiết kế cố định 820 px (xuất ảnh 1640 px chiều rộng, chiều cao tự giãn theo nội dung) nên ảnh giống nhau trên mọi kích thước màn hình; xem trước được thu nhỏ bằng CSS trên màn hình hẹp. Không có xuất PDF.
 
@@ -25,7 +25,7 @@ npm run dev
 
 Mở địa chỉ hiển thị trong terminal, dạng `http://localhost:5173/weblichsu/`. Dự án dùng `base: '/weblichsu/'` nên đường dẫn luôn có phần `/weblichsu/`.
 
-Ở chế độ `npm run dev` có thêm bảng "Xem khung (chỉ chế độ phát triển)" ở góc dưới để chuyển nhanh giữa các chặng và các chú thích tên file ảnh giữ chỗ. Các thành phần này không có trong bản build. Bảng này chỉ đổi chặng đang xem, không cộng điểm và không cấp mảnh mật mã.
+Ở chế độ `npm run dev` có thêm bảng "Xem khung (chỉ chế độ phát triển)" ở góc dưới để chuyển nhanh giữa các chặng và chú thích tên file ảnh. Các thành phần này không có trong bản build. Bảng này chỉ đổi chặng đang xem, không cộng điểm và không cấp mảnh mật mã.
 
 Trên Windows PowerShell, nếu lệnh `npm` báo bị chặn chạy script, hãy dùng `npm.cmd` (ví dụ `npm.cmd run dev`).
 
@@ -57,7 +57,7 @@ Không cần backend, API, cơ sở dữ liệu hay dịch vụ trả phí.
 
 - Không backend, API, cơ sở dữ liệu, mã QR hoặc dịch vụ trả phí.
 - Không dùng `localStorage`, `sessionStorage`, cookie, IndexedDB hay cơ chế lưu trạng thái qua lần tải trang. Toàn bộ dữ liệu chỉ nằm trong React state; tải lại trang là bắt đầu lại từ đầu. Test `src/test/static.test.ts` kiểm tra điều này.
-- Không dùng emoji. Không tự vẽ hoặc tạo ảnh: các ảnh hiện là file giữ chỗ màu phẳng, thay bằng ảnh thật theo [IMAGE_ASSETS.md](docs/IMAGE_ASSETS.md).
+- Không dùng emoji. Không tự vẽ hoặc tạo ảnh: toàn bộ ảnh do người dùng cung cấp; muốn đổi ảnh xem [IMAGE_ASSETS.md](docs/IMAGE_ASSETS.md).
 - Font Be Vietnam Pro và Playfair Display được đóng gói cùng ứng dụng qua `@fontsource` (có bộ ký tự tiếng Việt), không tải từ CDN.
 
 ## Cấu trúc thư mục
@@ -70,6 +70,6 @@ src/
   state/         GameProvider, useGame (trạng thái trong bộ nhớ)
   components/    layout/, common/, screens/, stages/
   styles/        tokens.css, global.css, components.css
-public/images/placeholders/   ảnh giữ chỗ
+public/images/placeholders/   ảnh (tên thư mục giữ nguyên từ lúc còn là ảnh giữ chỗ)
 docs/                         tài liệu dự án
 ```
