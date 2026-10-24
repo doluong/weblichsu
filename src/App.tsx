@@ -14,10 +14,13 @@ export default function App() {
   const [confirmOpen, setConfirmOpen] = useState(false)
 
   const closeConfirm = useCallback(() => setConfirmOpen(false), [])
+  const avatarUrl = state.ambassador.avatarUrl
   const confirmRestart = useCallback(() => {
+    // Thu hồi ảnh chân dung của phiên hiện tại trước khi xóa trạng thái.
+    if (avatarUrl) URL.revokeObjectURL(avatarUrl)
     dispatch({ type: 'RESET' })
     setConfirmOpen(false)
-  }, [dispatch])
+  }, [dispatch, avatarUrl])
 
   return (
     <div className="app">
@@ -36,7 +39,11 @@ export default function App() {
           />
         )}
         {state.screen === 'stage' && (
-          <StageScreen state={state} onSelectStage={(stage) => dispatch({ type: 'VIEW_STAGE', stage })} />
+          <StageScreen
+            state={state}
+            onSelectStage={(stage) => dispatch({ type: 'VIEW_STAGE', stage })}
+            onRestart={() => setConfirmOpen(true)}
+          />
         )}
       </main>
       <footer className="site-footer">

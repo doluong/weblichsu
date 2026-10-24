@@ -13,9 +13,10 @@ import { Stage5Frame } from '../stages/Stage5Frame'
 interface StageScreenProps {
   state: GameState
   onSelectStage: (stage: StageId) => void
+  onRestart: () => void
 }
 
-const FRAMES: Record<StageId, ComponentType> = {
+const FRAMES: Record<StageId, ComponentType<{ onRestart: () => void }>> = {
   1: Stage1Frame,
   2: Stage2Frame,
   3: Stage3Frame,
@@ -23,7 +24,7 @@ const FRAMES: Record<StageId, ComponentType> = {
   5: Stage5Frame,
 }
 
-export function StageScreen({ state, onSelectStage }: StageScreenProps) {
+export function StageScreen({ state, onSelectStage, onRestart }: StageScreenProps) {
   const Frame = FRAMES[state.currentStage]
   const stage = state.currentStage
   const showResult = stage <= 4 && state.stageStatus[stage] === 'completed'
@@ -37,7 +38,7 @@ export function StageScreen({ state, onSelectStage }: StageScreenProps) {
         {showResult && (
           <ResultPanel stage={stage as ScoredStageId} onContinue={() => onSelectStage((stage + 1) as StageId)} />
         )}
-        <Frame />
+        <Frame onRestart={onRestart} />
       </div>
     </div>
   )

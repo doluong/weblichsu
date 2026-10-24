@@ -1,0 +1,308 @@
+/* ---------- Chặng 5: biểu mẫu, kết quả và thẻ Đại sứ ---------- */
+.steps__item.is-done {
+  border-color: var(--jade);
+}
+
+.steps__item.is-done .steps__number {
+  background: var(--jade);
+  color: #fff;
+}
+
+.ambassador-form {
+  display: grid;
+  gap: 0.25rem;
+  max-width: 44rem;
+}
+
+.field__input--area {
+  min-height: 9rem;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.field__hint {
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.form-actions--end {
+  justify-content: flex-end;
+}
+
+.form-summary-error {
+  padding: 0.6rem 0.9rem;
+  color: var(--danger);
+  background: #fbeaea;
+  border: 1px solid #e3b6b6;
+  border-radius: var(--radius-small);
+  font-size: 0.925rem;
+}
+
+.suggestions {
+  margin: 0.25rem 0 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--parchment);
+  border-radius: var(--radius-small);
+  font-size: 0.9rem;
+}
+
+.suggestions ul {
+  list-style: disc;
+  padding-left: 1.2rem;
+  color: var(--muted);
+}
+
+.avatar-picker {
+  margin: 0.5rem 0;
+}
+
+.avatar-picker__preview {
+  width: 6.5rem;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+  border: 2px solid var(--gold);
+  border-radius: var(--radius-small);
+}
+
+.avatar-picker__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.avatar-picker__input {
+  max-width: 100%;
+  font-size: 0.9rem;
+}
+
+.ambassador-result {
+  display: grid;
+  gap: 1rem;
+}
+
+.notice--success {
+  background: #e4f2ec;
+  border-color: #9bcab6;
+  color: #15472f;
+  font-weight: 600;
+}
+
+.score-summary {
+  padding: 1rem 1.25rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.score-summary ul {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 0.6rem;
+}
+
+.score-summary li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.score-summary__total {
+  font-weight: 700;
+  color: var(--ink);
+  border-bottom: 0;
+}
+
+.failure {
+  border-left: 6px solid var(--terracotta);
+}
+
+.failure__message {
+  margin-top: 0.5rem;
+  font-size: 1.05rem;
+}
+
+/* Thẻ Đại sứ: kích thước thiết kế cố định, thu nhỏ bằng ScaledCard khi xem trước */
+.scaled-card {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin: 0.75rem 0;
+}
+
+.scaled-card__inner {
+  width: max-content;
+  transform-origin: top left;
+}
+
+.acard {
+  box-sizing: border-box;
+  padding: 18px;
+  color: #1c2a33;
+  background: #fffdf8;
+  font-family: var(--font-body);
+}
+
+.acard__frame {
+  padding: 36px 44px 32px;
+  background: linear-gradient(180deg, #fffdf8, #f7f1e5);
+  border: 4px double #b8893a;
+  text-align: center;
+}
+
+.acard__title {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #14232f;
+}
+
+.acard__subtitle {
+  margin-top: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: #7a5513;
+}
+
+.acard__awarded {
+  margin-top: 26px;
+  font-size: 20px;
+  font-style: italic;
+}
+
+.acard__who {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 16px;
+  text-align: left;
+}
+
+.acard__portrait {
+  flex: none;
+  width: 168px;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border: 3px solid #b8893a;
+  background: #efe5d0;
+}
+
+.acard__portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.acard__identity {
+  min-width: 0;
+  max-width: 440px;
+}
+
+.acard__name {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #14232f;
+  overflow-wrap: anywhere;
+}
+
+.acard__line {
+  margin-top: 8px;
+  font-size: 20px;
+  overflow-wrap: anywhere;
+}
+
+.acard__label {
+  font-weight: 700;
+  color: #7a5513;
+}
+
+.acard__completed {
+  margin-top: 26px;
+  font-size: 18px;
+}
+
+.acard__code {
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #2f6f64;
+}
+
+.acard__contribution {
+  margin-top: 22px;
+  text-align: left;
+}
+
+.acard__contribution .acard__label {
+  font-size: 18px;
+}
+
+.acard__action {
+  margin-top: 6px;
+  padding: 12px 16px;
+  font-size: 18px;
+  line-height: 1.55;
+  background: #fff;
+  border: 1px solid #d9ccb0;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.acard__score {
+  margin-top: 22px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.acard__score strong {
+  font-family: var(--font-display);
+  font-size: 40px;
+  color: #a64b32;
+}
+
+.acard__message {
+  margin-top: 14px;
+  padding: 14px 18px;
+  font-size: 18px;
+  font-style: italic;
+  line-height: 1.6;
+  text-align: left;
+  background: #f3ecdc;
+  border-left: 5px solid #b8893a;
+}
+
+.acard__footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 28px;
+  text-align: left;
+}
+
+.acard__date {
+  font-size: 18px;
+}
+
+.acard__teacher {
+  text-align: center;
+}
+
+.acard__teacher-name {
+  margin-top: 30px;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+}

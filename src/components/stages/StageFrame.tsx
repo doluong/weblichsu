@@ -26,7 +26,7 @@ export function StageFrame({ stageId, children, footer }: StageFrameProps) {
       <p className="stage__intro">{STAGE_INTROS[stageId]}</p>
       <div className="stage__body">{children}</div>
       <footer className="stage__footer">
-        {footer ?? (
+        {footer === undefined ? (
           <>
             <p className="stage__note">{UI_TEXT.stageSkeletonNote}</p>
             {stageId !== 5 && (
@@ -35,6 +35,8 @@ export function StageFrame({ stageId, children, footer }: StageFrameProps) {
               </Button>
             )}
           </>
+        ) : (
+          footer
         )}
       </footer>
     </article>
