@@ -38,4 +38,14 @@ export const UI_TEXT = {
   stageComplete: 'Hoàn thành',
   stage1Hint: 'Mỗi ảnh cần mở ít nhất 1 ô và chọn một đáp án trước khi hoàn thành.',
   stage1Locked: 'Chặng 1 đã hoàn thành, các câu trả lời đã được khóa.',
+  // Chặng 2: nút theo tài liệu "Hoàn thành thử thách"; các chữ còn lại là đề xuất (K1)
+  stage2Complete: 'Hoàn thành thử thách',
+  stage2Hint:
+    'Chọn một thẻ rồi chọn giai đoạn (hoặc kéo thả). Có thể hoàn thành khi chưa đặt hết; thẻ chưa đặt được 0 điểm.',
+  stage2Locked: 'Chặng 2 đã hoàn thành, các thẻ đã được khóa.',
+  stage2PickZone: 'Hãy chọn giai đoạn để đặt thẻ.',
+  stage2PlaceHere: 'Đặt thẻ vào đây',
+  stage2EmptyZone: 'Chưa có thẻ',
+  stage2BankEmpty: 'Đã đặt hết thẻ',
+  stage2ReturnToBank: 'Trả thẻ đã chọn về ngân hàng',
 } as const

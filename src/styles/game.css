@@ -174,3 +174,64 @@ fieldset:disabled .option {
 .result .btn {
   justify-self: start;
 }
+
+/* ---------- Chặng 2: thẻ và trạm thả ---------- */
+.status-line {
+  padding: 0.6rem 0.9rem;
+  background: var(--parchment);
+  border-radius: var(--radius-small);
+  font-size: 0.925rem;
+}
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip-list--zone {
+  margin-bottom: 0.6rem;
+}
+
+.chip {
+  min-height: var(--tap);
+  padding: 0.4rem 0.9rem;
+  color: var(--ink);
+  background: #fff;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  font-weight: 500;
+  text-align: left;
+  cursor: grab;
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+  touch-action: manipulation;
+}
+
+.chip:hover:not(:disabled) {
+  border-color: var(--gold);
+}
+
+.chip.is-selected {
+  color: var(--ivory);
+  background: var(--ink);
+  border-color: var(--ink);
+  transform: translateY(-2px);
+}
+
+.chip:disabled {
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+.timeline__zone .btn {
+  margin-top: 0.6rem;
+}
+
+.bank {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.bank .btn {
+  justify-self: start;
+}
