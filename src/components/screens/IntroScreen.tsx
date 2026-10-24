@@ -11,7 +11,7 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
   return (
     <div className="screen intro">
       <section className="hero">
-        <p className="hero__eyebrow">Hành trình khám phá di sản</p>
+        <p className="hero__eyebrow">Hành trình khám phá</p>
         <h1 className="hero__title">{BRAND_TITLE}</h1>
         <blockquote className="hero__lead">
           <p>{`“${INTRO_TEXT}”`}</p>

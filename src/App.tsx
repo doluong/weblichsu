@@ -47,7 +47,7 @@ export default function App() {
         )}
       </main>
       <footer className="site-footer">
-        <p>Mật mã văn minh Đông Nam Á - trò chơi giáo dục. Tiến trình chỉ lưu trong bộ nhớ trình duyệt.</p>
+        <p>Trò chơi giáo dục được phát triển bởi cô giáo Nguyễn Thị Thảo - Trường THPT Thăng Long (Hà Nội)</p>
       </footer>
       <ConfirmDialog
         open={confirmOpen}

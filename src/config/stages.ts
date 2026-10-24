@@ -39,7 +39,7 @@ export const FRAGMENT_SLOTS: readonly { stage: ScoredStageId; text: string }[] =
 )
 
 export function formatMaxPoints(stage: StageMeta): string {
-  return stage.maxPoints === null ? 'Không tính điểm' : `${stage.maxPoints} điểm`
+  return stage.maxPoints === null ? 'Tạo thẻ' : `${stage.maxPoints} điểm`
 }
 
 // Màu 4 ô che ảnh ở Chặng 1 (thứ tự: trên-trái, trên-phải, dưới-trái, dưới-phải). Có thể chỉnh tại đây.
