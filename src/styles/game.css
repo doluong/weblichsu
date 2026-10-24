@@ -329,11 +329,6 @@ fieldset:disabled .option {
   opacity: 0.8;
 }
 
-.artifact__caption {
-  font-size: 0.8rem;
-  line-height: 1.35;
-}
-
 .passage {
   display: grid;
   gap: 0.9rem;
