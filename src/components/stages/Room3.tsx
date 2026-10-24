@@ -1,4 +1,4 @@
-import { ROOM3_QUESTIONS } from '../../content/stage3'
+import { ROOM3_QUESTIONS, orderedOptions } from '../../content/stage3'
 import { useGame } from '../../state/useGame'
 import { ImageSlot } from '../common/ImageSlot'
 import { OptionGroup } from '../common/OptionGroup'
@@ -7,6 +7,7 @@ import { OptionGroup } from '../common/OptionGroup'
 export function Room3({ locked }: { locked: boolean }) {
   const { state, dispatch } = useGame()
   const answers = state.stage3.room3
+  const order = state.stage3.room3Order
 
   return (
     <ul className="buildings">
@@ -19,8 +20,7 @@ export function Room3({ locked }: { locked: boolean }) {
             legend={item.question}
             disabled={locked}
             value={answers[item.id]}
-            options={item.options}
-            letterOf={(option) => option.id}
+            options={orderedOptions(item.options, order[item.id])}
             onChange={(optionId) => dispatch({ type: 'ANSWER_ROOM3', questionId: item.id, optionId })}
           />
         </li>

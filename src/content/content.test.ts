@@ -81,6 +81,12 @@ describe('nội dung Chặng 3', () => {
     expect(used).toEqual(ROOM2_BLANKS.map((blank) => blank.id))
   })
 
+  it('Tư liệu 2 có dấu chấm cuối câu (L.K1.5)', () => {
+    const passage2 = ROOM2_PASSAGES[1].segments
+    const last = passage2[passage2.length - 1]
+    expect(last.type === 'text' && last.value.endsWith('giá trị nhân văn Đông Nam Á.')).toBe(true)
+  })
+
   it('Phòng 3: 4 câu, đáp án B, A, B, B, mỗi công trình một ảnh riêng', () => {
     expect(ROOM3_QUESTIONS).toHaveLength(4)
     expect(ROOM3_QUESTIONS.map((q) => q.correctOptionId)).toEqual(['B', 'A', 'B', 'B'])

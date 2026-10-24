@@ -3,6 +3,7 @@ import { STAGE2_CARD_TEXT, STAGE2_CARDS, STAGE2_PERIODS, type PeriodId } from '.
 import { UI_TEXT } from '../../content/uiText'
 import { useGame } from '../../state/useGame'
 import { Button } from '../common/Button'
+import { ConfirmDialog } from '../layout/ConfirmDialog'
 import { StageFrame } from './StageFrame'
 
 export function Stage2Frame() {
@@ -10,10 +11,21 @@ export function Stage2Frame() {
   const { placements, cardOrder } = state.stage2
   const locked = state.stageStatus[2] !== 'in_progress'
   const [selected, setSelected] = useState<string | null>(null)
+  const [confirmOpen, setConfirmOpen] = useState(false)
 
   const bank = cardOrder.filter((id) => placements[id] === null)
   const placedCount = STAGE2_CARDS.length - bank.length
   const selectedIsPlaced = selected !== null && placements[selected] !== null
+
+  // L.K1.2: cần hộp cảnh báo khi chưa đặt hết thẻ; đặt đủ thì hoàn thành ngay.
+  const requestSubmit = () => {
+    if (bank.length > 0) setConfirmOpen(true)
+    else dispatch({ type: 'SUBMIT_STAGE2' })
+  }
+  const confirmSubmit = () => {
+    setConfirmOpen(false)
+    dispatch({ type: 'SUBMIT_STAGE2' })
+  }
 
   const place = (cardId: string, period: PeriodId | null) => {
     dispatch({ type: 'PLACE_CARD', cardId, period })
@@ -54,7 +66,7 @@ export function Stage2Frame() {
       footer={
         <>
           <p className="stage__note">{locked ? UI_TEXT.stage2Locked : UI_TEXT.stage2Hint}</p>
-          <Button disabled={locked} onClick={() => dispatch({ type: 'SUBMIT_STAGE2' })}>
+          <Button disabled={locked} onClick={requestSubmit}>
             {UI_TEXT.stage2Complete}
           </Button>
         </>
@@ -119,6 +131,15 @@ export function Stage2Frame() {
           {UI_TEXT.stage2ReturnToBank}
         </Button>
       </section>
+      <ConfirmDialog
+        open={confirmOpen}
+        title={UI_TEXT.stage2ConfirmTitle}
+        body={UI_TEXT.stage2ConfirmBody(bank.length)}
+        confirmLabel={UI_TEXT.stage2ConfirmYes}
+        cancelLabel={UI_TEXT.stage2ConfirmNo}
+        onConfirm={confirmSubmit}
+        onCancel={() => setConfirmOpen(false)}
+      />
     </StageFrame>
   )
 }

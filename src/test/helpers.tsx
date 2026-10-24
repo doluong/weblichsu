@@ -48,3 +48,10 @@ export async function playStage1(user: User, correct: boolean): Promise<void> {
 export async function continueToStage(user: User, stage: number): Promise<void> {
   await user.click(screen.getByRole('button', { name: `Tiếp tục Chặng ${stage}` }))
 }
+
+// Bấm "Hoàn thành thử thách" ở Chặng 2; nếu còn thẻ chưa đặt thì xác nhận hộp cảnh báo (L.K1.2).
+export async function submitStage2(user: User): Promise<void> {
+  await user.click(screen.getByRole('button', { name: 'Hoàn thành thử thách' }))
+  const dialog = screen.queryByRole('alertdialog')
+  if (dialog) await user.click(within(dialog).getByRole('button', { name: 'Vẫn hoàn thành' }))
+}

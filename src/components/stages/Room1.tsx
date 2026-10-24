@@ -45,8 +45,7 @@ export function Room1({ locked }: { locked: boolean }) {
         onDragStart={(event) => onDragStart(event, itemId)}
         onClick={() => setSelected(selected === itemId ? null : itemId)}
       >
-        <ImageSlot as="div" imageKey={item.imageKey} alt="" />
-        <span className="artifact__caption">{item.description}</span>
+        <ImageSlot as="div" imageKey={item.imageKey} alt={item.description} />
       </button>
     )
   }

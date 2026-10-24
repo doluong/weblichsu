@@ -1,6 +1,6 @@
 import { STAGE1_IMAGES, STAGE1_OPTIONS } from '../content/stage1'
 import { STAGE2_CARDS } from '../content/stage2'
-import { ROOM1_ARTIFACTS } from '../content/stage3'
+import { ROOM1_ARTIFACTS, ROOM2_BLANKS, ROOM3_QUESTIONS } from '../content/stage3'
 
 export type Rng = () => number
 
@@ -30,6 +30,13 @@ export interface Shuffles {
   stage1Options: [string[], string[]]
   stage2Cards: string[]
   stage3Artifacts: string[]
+  // Thứ tự lựa chọn của từng chỗ trống (Phòng 2) và từng câu hỏi (Phòng 3), theo mã lựa chọn (L.K1.6).
+  room2Options: Record<string, string[]>
+  room3Options: Record<string, string[]>
+}
+
+function optionIdsByKey(items: readonly { id: string; options: readonly { id: string }[] }[]): Record<string, string[]> {
+  return Object.fromEntries(items.map((item) => [item.id, item.options.map((option) => option.id)]))
 }
 
 export function defaultShuffles(): Shuffles {
@@ -38,15 +45,23 @@ export function defaultShuffles(): Shuffles {
     stage1Options: [[...optionIds], [...optionIds]],
     stage2Cards: STAGE2_CARDS.map((card) => card.id),
     stage3Artifacts: ROOM1_ARTIFACTS.map((item) => item.id),
+    room2Options: optionIdsByKey(ROOM2_BLANKS),
+    room3Options: optionIdsByKey(ROOM3_QUESTIONS),
   }
 }
 
-// Mỗi ảnh Chặng 1 xáo lựa chọn riêng; Ngân hàng thẻ Chặng 2 và hiện vật Phòng 1 xáo ngẫu nhiên (tài liệu).
+function shuffleValues(map: Record<string, string[]>, rng: Rng): Record<string, string[]> {
+  return Object.fromEntries(Object.entries(map).map(([key, ids]) => [key, shuffle(ids, rng)]))
+}
+
+// Mỗi ảnh Chặng 1 xáo lựa chọn riêng; Ngân hàng thẻ Chặng 2, hiện vật Phòng 1 và lựa chọn Phòng 2-3 xáo ngẫu nhiên.
 export function createShuffles(rng: Rng = Math.random): Shuffles {
   const base = defaultShuffles()
   return {
     stage1Options: STAGE1_IMAGES.map(() => shuffle(base.stage1Options[0], rng)) as [string[], string[]],
     stage2Cards: shuffle(base.stage2Cards, rng),
     stage3Artifacts: shuffle(base.stage3Artifacts, rng),
+    room2Options: shuffleValues(base.room2Options, rng),
+    room3Options: shuffleValues(base.room3Options, rng),
   }
 }

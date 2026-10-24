@@ -1,4 +1,4 @@
-import { ROOM2_BLANKS, ROOM2_PASSAGES } from '../../content/stage3'
+import { ROOM2_BLANKS, ROOM2_PASSAGES, orderedOptions } from '../../content/stage3'
 import { useGame } from '../../state/useGame'
 import { OptionGroup } from '../common/OptionGroup'
 
@@ -8,6 +8,7 @@ const BLANK_BY_ID = Object.fromEntries(ROOM2_BLANKS.map((blank) => [blank.id, bl
 export function Room2({ locked }: { locked: boolean }) {
   const { state, dispatch } = useGame()
   const answers = state.stage3.room2
+  const order = state.stage3.room2Order
 
   return (
     <div className="room-body">
@@ -38,8 +39,7 @@ export function Room2({ locked }: { locked: boolean }) {
                     legend={`Lựa chọn điền ${blank.marker}`}
                     disabled={locked}
                     value={answers[blankId]}
-                    options={blank.options}
-                    letterOf={(option) => option.id}
+                    options={orderedOptions(blank.options, order[blankId])}
                     onChange={(optionId) => dispatch({ type: 'ANSWER_ROOM2', blankId, optionId })}
                   />
                 )

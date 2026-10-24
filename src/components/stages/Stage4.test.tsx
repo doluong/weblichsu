@@ -1,13 +1,13 @@
 import { screen, within } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { STAGE4_EVIDENCE } from '../../content/stage4'
-import { continueToStage, playStage1, renderApp, startGame, type User } from '../../test/helpers'
+import { continueToStage, playStage1, renderApp, startGame, submitStage2, type User } from '../../test/helpers'
 
 async function reachStage4(user: User) {
   await startGame(user)
   await playStage1(user, true)
   await continueToStage(user, 2)
-  await user.click(screen.getByRole('button', { name: 'Hoàn thành thử thách' }))
+  await submitStage2(user)
   await continueToStage(user, 3)
   // Chặng 3: đặt đúng Phòng 1, các phòng sau chọn đáp án đầu tiên của mỗi mục.
   for (const [artifact, cabinet] of [

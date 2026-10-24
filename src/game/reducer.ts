@@ -27,6 +27,10 @@ function nullMap(ids: readonly string[]): Record<string, null> {
   return Object.fromEntries(ids.map((id) => [id, null]))
 }
 
+function copyOrders(orders: Readonly<Record<string, readonly string[]>>): Record<string, string[]> {
+  return Object.fromEntries(Object.entries(orders).map(([key, ids]) => [key, [...ids]]))
+}
+
 // Trạng thái ban đầu. Mọi dữ liệu chỉ nằm trong bộ nhớ; tải lại trang là bắt đầu lại.
 export function createInitialState(shuffles: Shuffles = defaultShuffles()): GameState {
   return {
@@ -52,7 +56,9 @@ export function createInitialState(shuffles: Shuffles = defaultShuffles()): Game
       room1: nullMap(ROOM1_ARTIFACTS.map((item) => item.id)),
       room1Order: [...shuffles.stage3Artifacts],
       room2: nullMap(ROOM2_BLANKS.map((blank) => blank.id)),
+      room2Order: copyOrders(shuffles.room2Options),
       room3: nullMap(ROOM3_QUESTIONS.map((question) => question.id)),
+      room3Order: copyOrders(shuffles.room3Options),
     },
     stage4: { roleId: null, opened: [], voteId: null },
     scores: { 1: null, 2: null, 3: null, 4: null },

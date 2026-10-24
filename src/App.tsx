@@ -6,6 +6,7 @@ import { createShuffles } from './game/shuffle'
 import { InfoScreen } from './components/screens/InfoScreen'
 import { IntroScreen } from './components/screens/IntroScreen'
 import { StageScreen } from './components/screens/StageScreen'
+import { UI_TEXT } from './content/uiText'
 import { useGame } from './state/useGame'
 
 export default function App() {
@@ -41,7 +42,15 @@ export default function App() {
       <footer className="site-footer">
         <p>Mật mã văn minh Đông Nam Á - trò chơi giáo dục. Tiến trình chỉ lưu trong bộ nhớ trình duyệt.</p>
       </footer>
-      <ConfirmDialog open={confirmOpen} onConfirm={confirmRestart} onCancel={closeConfirm} />
+      <ConfirmDialog
+        open={confirmOpen}
+        title={UI_TEXT.restartConfirmTitle}
+        body={UI_TEXT.restartConfirmBody}
+        confirmLabel={UI_TEXT.restartConfirmYes}
+        cancelLabel={UI_TEXT.restartConfirmNo}
+        onConfirm={confirmRestart}
+        onCancel={closeConfirm}
+      />
       {import.meta.env.DEV && (
         <DevStageNav current={state.currentStage} onJump={(stage) => dispatch({ type: 'DEV_JUMP', stage })} />
       )}

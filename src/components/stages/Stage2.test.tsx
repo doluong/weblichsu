@@ -1,7 +1,7 @@
 import { fireEvent, screen, within } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { STAGE2_CARD_TEXT, STAGE2_CARDS, STAGE2_PERIODS } from '../../content/stage2'
-import { continueToStage, playStage1, renderApp, startGame, type User } from '../../test/helpers'
+import { continueToStage, playStage1, renderApp, startGame, submitStage2, type User } from '../../test/helpers'
 
 async function reachStage2(user: User) {
   await startGame(user)
@@ -79,10 +79,14 @@ describe('Chặng 2 - giao diện', () => {
     expect(within(zoneOf('p1')).getByRole('button', { name: 'Phù Nam' })).toBeDisabled()
   })
 
-  it('không đặt thẻ nào: 0/30, thông báo khuyến khích, không có mảnh SẢN', async () => {
+  it('không đặt thẻ nào: hiện hộp cảnh báo; xác nhận thì 0/30, thông báo khuyến khích, không có mảnh SẢN', async () => {
     const user = renderApp()
     await reachStage2(user)
     await user.click(screen.getByRole('button', { name: 'Hoàn thành thử thách' }))
+
+    const dialog = screen.getByRole('alertdialog')
+    expect(dialog).toHaveTextContent('Bạn còn 15 thẻ chưa đặt vào giai đoạn nào')
+    await user.click(within(dialog).getByRole('button', { name: 'Vẫn hoàn thành' }))
 
     const result = screen.getByRole('region', { name: 'Kết quả Chặng 2' })
     expect(result).toHaveTextContent('Điểm số: 0/30 điểm')
@@ -91,11 +95,34 @@ describe('Chặng 2 - giao diện', () => {
     expect(result).toHaveTextContent('Tổng điểm hiện tại: 20/100')
   })
 
+  it('chọn "Quay lại" trong hộp cảnh báo thì chưa hoàn thành và giữ nguyên các thẻ đã đặt', async () => {
+    const user = renderApp()
+    await reachStage2(user)
+    await placeCard(user, 'c03', 'p1')
+    await user.click(screen.getByRole('button', { name: 'Hoàn thành thử thách' }))
+    expect(screen.getByRole('alertdialog')).toHaveTextContent('Bạn còn 14 thẻ chưa đặt')
+    await user.click(within(screen.getByRole('alertdialog')).getByRole('button', { name: 'Quay lại' }))
+
+    expect(screen.queryByRole('alertdialog')).not.toBeInTheDocument()
+    expect(screen.queryByRole('region', { name: 'Kết quả Chặng 2' })).not.toBeInTheDocument()
+    expect(within(zoneOf('p1')).getByRole('button', { name: 'Phù Nam' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Hoàn thành thử thách' })).toBeEnabled()
+  })
+
+  it('đặt đủ 15 thẻ thì hoàn thành ngay, không hỏi cảnh báo', async () => {
+    const user = renderApp()
+    await reachStage2(user)
+    await placeAllCorrect(user)
+    await user.click(screen.getByRole('button', { name: 'Hoàn thành thử thách' }))
+    expect(screen.queryByRole('alertdialog')).not.toBeInTheDocument()
+    expect(screen.getByRole('region', { name: 'Kết quả Chặng 2' })).toBeInTheDocument()
+  })
+
   it('đúng 7 thẻ = 14 điểm: thông báo khuyến khích và không nhận mảnh SẢN', async () => {
     const user = renderApp()
     await reachStage2(user)
     await placeAllCorrect(user, 7)
-    await user.click(screen.getByRole('button', { name: 'Hoàn thành thử thách' }))
+    await submitStage2(user)
     const result = screen.getByRole('region', { name: 'Kết quả Chặng 2' })
     expect(result).toHaveTextContent('Điểm số: 14/30 điểm')
     expect(result).not.toHaveTextContent('Nhận mảnh mật mã')
@@ -105,9 +132,11 @@ describe('Chặng 2 - giao diện', () => {
     const user = renderApp()
     await reachStage2(user)
     await placeAllCorrect(user, 8)
+    await submitStage2(user)
     const submit = screen.getByRole('button', { name: 'Hoàn thành thử thách' })
     await user.dblClick(submit)
     await user.click(submit)
+    expect(screen.queryByRole('alertdialog')).not.toBeInTheDocument()
     const result = screen.getByRole('region', { name: 'Kết quả Chặng 2' })
     expect(result).toHaveTextContent('Điểm số: 16/30 điểm')
     expect(result).toHaveTextContent('Tổng điểm hiện tại: 36/100')

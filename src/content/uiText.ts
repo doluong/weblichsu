@@ -48,6 +48,12 @@ export const UI_TEXT = {
   stage2EmptyZone: 'Chưa có thẻ',
   stage2BankEmpty: 'Đã đặt hết thẻ',
   stage2ReturnToBank: 'Trả thẻ đã chọn về ngân hàng',
+  // Hộp cảnh báo khi hoàn thành Chặng 2 còn thẻ chưa đặt (L.K1.2; chữ là đề xuất, K1.3 đã đồng ý)
+  stage2ConfirmTitle: 'Còn thẻ chưa được đặt',
+  stage2ConfirmBody: (remaining: number) =>
+    `Bạn còn ${remaining} thẻ chưa đặt vào giai đoạn nào, các thẻ này sẽ được 0 điểm. Bạn có chắc muốn hoàn thành?`,
+  stage2ConfirmYes: 'Vẫn hoàn thành',
+  stage2ConfirmNo: 'Quay lại',
   // Chặng 3: nút và gợi ý là đề xuất (K1)
   stage3RoomComplete: 'Hoàn thành phòng',
   stage3Room1Hint: 'Chọn một hiện vật rồi chọn tủ trưng bày (hoặc kéo thả). Mỗi tủ chứa một hiện vật.',

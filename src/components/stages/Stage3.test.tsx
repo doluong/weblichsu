@@ -1,13 +1,13 @@
 import { screen, within } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { ROOM1_ARTIFACTS, ROOM1_CABINETS, ROOM2_BLANKS, ROOM3_QUESTIONS } from '../../content/stage3'
-import { continueToStage, playStage1, renderApp, startGame, type User } from '../../test/helpers'
+import { continueToStage, playStage1, renderApp, startGame, submitStage2, type User } from '../../test/helpers'
 
 async function reachStage3(user: User) {
   await startGame(user)
   await playStage1(user, true)
   await continueToStage(user, 2)
-  await user.click(screen.getByRole('button', { name: 'Hoàn thành thử thách' }))
+  await submitStage2(user)
   await continueToStage(user, 3)
 }
 
@@ -94,6 +94,18 @@ describe('Chặng 3 - giao diện', () => {
     expect(result).toHaveTextContent('Tổng điểm hiện tại: 60/100')
     expect(within(screen.getByRole('region', { name: 'Mảnh mật mã đã nhận' })).getByText('KẾT NỐI')).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Hoàn thành phòng 3' })).toBeDisabled()
+  })
+
+  it('nhãn A-D gán theo vị trí hiển thị; chấm theo mã lựa chọn nên vẫn đúng khi đã xáo', async () => {
+    const user = renderApp()
+    await reachStage3(user)
+    await doRoom1(user, true)
+    const group = screen.getByRole('group', { name: 'Lựa chọn điền [..1..]' })
+    const letters = [...group.querySelectorAll('.option__letter')].map((node) => node.textContent)
+    expect(letters).toEqual(['A', 'B', 'C', 'D'])
+    await doRoom2(user, 0)
+    await doRoom3(user, true)
+    expect(screen.getByRole('region', { name: 'Kết quả Chặng 3' })).toHaveTextContent('Điểm số: 40/40 điểm')
   })
 
   it('điểm thập phân hiển thị dấu phẩy: 37,5/40 (Phòng 2 đúng 3 câu)', async () => {

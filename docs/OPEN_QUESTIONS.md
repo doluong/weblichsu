@@ -313,3 +313,17 @@ Sau khi hoàn tất, chạy test, kiểm tra TypeScript và build. Sửa lỗi t
 | K1.10 | Ngưỡng thông báo: các điểm 15 và 19 ở Chặng 1, 15 và 29 ở Chặng 2 không thuộc mốc nào của tài liệu | Hàm `stageNTier` trả về `null`, giao diện không hiển thị thông báo mới; các điểm này không thể đạt được | Đã ghi nhận, không cần xử lý |
 | K1.11 | Chặng 3: điểm Phòng 1 chỉ có thể là 0, 2,5, 5 hoặc 10 (hoán vị bốn hiện vật không thể đúng đúng 3 mục) | Chấm đúng theo luật 2,5 điểm mỗi hiện vật | Đã ghi nhận |
 | K1.12 | Chặng 5 chưa triển khai (mật mã, thẻ, xuất PNG); tổng điểm hiện hiển thị sau mỗi chặng | Chặng 5 vẫn là khung giao diện, không tính điểm | Bước tiếp theo |
+
+## L. Xác nhận của người dùng cho mục K
+K1.1: Tôi sẽ thêm ảnh thật sau, bỏ chữ mô tả đi.
+K1.2: Cần hộp cảnh báo khi chưa hoàn thành tất cả.
+K1.3: Đồng ý với đề xuất.
+K1.4: Đồng ý.
+K1.5: Xác nhận có thêm dấu chấm.
+K1.6: Có xáo trộn lựa chọn.
+K1.7: Thẻ nhân vật đổi được trước khi hoàn thành (tính lựa chọn cuối cùng); thẻ chứng cứ đã mở giữ nguyên mở và không cộng lặp.
+K1.8: Đồng ý.
+K1.9: Đồng ý.
+K1.10: Đồng ý.
+K1.11: Đồng ý.
+K1.12: Đồng ý.

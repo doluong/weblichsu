@@ -28,4 +28,21 @@ describe('shuffle', () => {
     expect([...shuffled.stage3Artifacts].sort()).toEqual([...base.stage3Artifacts].sort())
     expect(shuffled.stage1Options[0]).not.toEqual(shuffled.stage1Options[1])
   })
+
+  it('xáo lựa chọn Phòng 2 và Phòng 3 nhưng giữ nguyên tập mã lựa chọn của từng mục', () => {
+    const base = defaultShuffles()
+    const shuffled = createShuffles(mulberry32(11))
+    expect(Object.keys(shuffled.room2Options)).toEqual(Object.keys(base.room2Options))
+    expect(Object.keys(shuffled.room3Options)).toEqual(Object.keys(base.room3Options))
+    for (const key of Object.keys(base.room2Options)) {
+      expect([...shuffled.room2Options[key]].sort()).toEqual(['A', 'B', 'C', 'D'])
+    }
+    for (const key of Object.keys(base.room3Options)) {
+      expect([...shuffled.room3Options[key]].sort()).toEqual(['A', 'B', 'C', 'D'])
+    }
+    const changed = Object.keys(base.room3Options).some(
+      (key) => shuffled.room3Options[key].join('') !== base.room3Options[key].join(''),
+    )
+    expect(changed).toBe(true)
+  })
 })

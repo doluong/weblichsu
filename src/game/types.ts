@@ -36,7 +36,10 @@ export interface Stage3State {
   room1: Record<string, string | null>
   room1Order: string[]
   room2: Record<string, string | null>
+  // Thứ tự hiển thị lựa chọn đã xáo của từng chỗ trống / câu hỏi (theo mã lựa chọn).
+  room2Order: Record<string, string[]>
   room3: Record<string, string | null>
+  room3Order: Record<string, string[]>
 }
 
 export interface Stage4State {

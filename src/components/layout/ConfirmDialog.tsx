@@ -1,15 +1,18 @@
 import { useEffect, useRef } from 'react'
-import { UI_TEXT } from '../../content/uiText'
 import { Button } from '../common/Button'
 
 interface ConfirmDialogProps {
   open: boolean
+  title: string
+  body: string
+  confirmLabel: string
+  cancelLabel: string
   onConfirm: () => void
   onCancel: () => void
 }
 
-// Hộp xác nhận trước khi xóa tiến trình đang chạy (khởi động lại).
-export function ConfirmDialog({ open, onConfirm, onCancel }: ConfirmDialogProps) {
+// Hộp xác nhận dùng chung (khởi động lại, hoàn thành khi chưa đủ...). Mặc định đưa tiêu điểm vào nút hủy.
+export function ConfirmDialog({ open, title, body, confirmLabel, cancelLabel, onConfirm, onCancel }: ConfirmDialogProps) {
   const cancelRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
@@ -35,17 +38,17 @@ export function ConfirmDialog({ open, onConfirm, onCancel }: ConfirmDialogProps)
         onClick={(event) => event.stopPropagation()}
       >
         <h2 id="confirm-title" className="dialog__title">
-          {UI_TEXT.restartConfirmTitle}
+          {title}
         </h2>
         <p id="confirm-body" className="dialog__body">
-          {UI_TEXT.restartConfirmBody}
+          {body}
         </p>
         <div className="dialog__actions">
           <Button ref={cancelRef} variant="ghost" onClick={onCancel}>
-            {UI_TEXT.restartConfirmNo}
+            {cancelLabel}
           </Button>
           <Button variant="danger" onClick={onConfirm}>
-            {UI_TEXT.restartConfirmYes}
+            {confirmLabel}
           </Button>
         </div>
       </div>

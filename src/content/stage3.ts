@@ -17,7 +17,8 @@ export const ROOM1_CABINETS: readonly { id: string; label: string }[] = [
 export interface Room1Artifact {
   id: string
   imageKey: ImageKey
-  // Mô tả hiện vật nguyên văn từ tài liệu. Hiển thị cùng ảnh (xem OPEN_QUESTIONS K1).
+  // Mô tả hiện vật nguyên văn từ tài liệu. Chỉ dùng làm văn bản thay thế (alt) cho trình đọc màn hình,
+  // không hiển thị thành chữ trên giao diện (L.K1.1).
   description: string
   correctCabinetId: string
 }
@@ -138,7 +139,7 @@ export const ROOM2_PASSAGES: readonly { id: string; title: string; segments: rea
       {
         type: 'text',
         value:
-          ' là tác phẩm đánh dấu bước phát triển đỉnh cao của văn học chữ Nôm tại Việt Nam, phản ánh đậm nét tâm hồn và giá trị nhân văn Đông Nam Á',
+          ' là tác phẩm đánh dấu bước phát triển đỉnh cao của văn học chữ Nôm tại Việt Nam, phản ánh đậm nét tâm hồn và giá trị nhân văn Đông Nam Á.',
       },
     ],
   },
@@ -215,6 +216,11 @@ export const ROOM3_QUESTIONS: readonly Room3Question[] = [
 ]
 
 // ---------- Đáp án để chấm điểm ----------
+// Trả về lựa chọn theo thứ tự đã xáo (mã lựa chọn). Nhãn A-D hiển thị theo vị trí; chấm điểm theo mã.
+export function orderedOptions(options: readonly ChoiceOption[], order: readonly string[] | undefined): ChoiceOption[] {
+  if (!order) return [...options]
+  return order.flatMap((id) => options.filter((option) => option.id === id))
+}
 export const STAGE3_KEYS = {
   room1: Object.fromEntries(ROOM1_ARTIFACTS.map((item) => [item.id, item.correctCabinetId])) as Record<string, string>,
   room2: Object.fromEntries(ROOM2_BLANKS.map((blank) => [blank.id, blank.correctOptionId])) as Record<string, string>,
