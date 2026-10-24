@@ -358,3 +358,13 @@ B21-B31, C1, C4, C5, C6, J.I1 (lời dẫn Chặng 5 giữ toàn văn, gồm câ
 - Test giao diện: thiếu thông tin, sửa thông tin, tải ảnh hợp lệ/không hợp lệ và thu hồi URL, đúng/sai mật mã, tái khởi động, ngày cấp, xuất thẻ (có giả lập thư viện).
 - Chạy thật trên trình duyệt: xuất PNG 1640 px chiều rộng, chữ tiếng Việt đúng font, không cắt chữ với nội dung 50 từ, ảnh chân dung tải lên hiển thị đúng vị trí và không méo; kích thước ảnh xuất giống nhau ở khung nhìn 1280 px và 375 px. Phát hiện và sửa lỗi: tùy chọn `cacheBust` làm hỏng ảnh `blob:` của người dùng khi xuất.
 - Chưa thử: xuất trên thiết bị di động thật, trình duyệt Safari, in thẻ.
+
+## N. Xác nhận của người dùng cho mục M
+M2.1: Đồng ý
+M2.2: Đồng ý
+M2.3: Đồng ý
+M2.4: Đồng ý
+M2.5: Đồng ý
+M2.6: Đồng ý
+M2.7: Sửa lời dẫn "ghi danh vào Bảng Vàng Hội đồng Di sản" thành ""ghi danh vào Hội đồng Di sản".
+M2.8: Đồng ý
