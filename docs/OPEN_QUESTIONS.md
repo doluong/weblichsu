@@ -213,6 +213,8 @@ Mọi chữ giao diện được gom vào `src/content/uiText.ts` và đánh d�
 
 ## F. Việc còn chờ xác nhận trước khi viết tính năng liên quan
 
+Đã được giải quyết bởi phần G (xem H). Bảng dưới là trạng thái ở lần cập nhật 2, giữ lại để đối chiếu.
+
 | Tính năng | Chờ xác nhận |
 |---|---|
 | Chặng 1 (nội dung và giao diện) | B1 đầy đủ: C3 (tên riêng, đáp án đúng, thứ tự lựa chọn) và C2 |
@@ -221,3 +223,44 @@ Mọi chữ giao diện được gom vào `src/content/uiText.ts` và đánh d�
 | Chữ giao diện bổ sung | E4 |
 
 Các phần còn lại (Chặng 2, 4, tổng điểm, khung giao diện) không bị chặn.
+
+## G. Xác nhận của người dùng
+C1: Các chặng có thể nhận được thẻ hoặc không nhận được thẻ. Tuy nhiên không cần đầy đủ thẻ người dùng vẫn có thể đoán và hoàn thành được mật mã. Nên ở chặng 5 chỉ hiển thị mảnh đã nhận được qua các chặng. Chặng không nhận được thẻ hiển thị mảnh trống. Người chơi phải điền đúng mật mã mới hoàn thành chặng 5. Không tự thêm luật.
+C2: Áp dụng E1.4: nút chỉ sáng khi mỗi ảnh đã mở ít nhất 1 ô và đã chọn đáp án; bấm xong khóa cả hai ảnh, điểm tính riêng từng ảnh, không thử lại, không tiết lộ đáp án đúng khi sai.
+C3: (a) Đáp án viết sai chính tả, sửa "War Rong Khun" thành "Wat Rong Khun", "Shwedagob" thành "Shwedagon"; (b) "Chùa Borobudur" trái quy tắc hiển thị "Bô-rô-bu-đua" (E1.5) và Chặng 3 gọi là "Đền"; (c) Ảnh 1 đáp án đúng là Angkor Wat, ảnh 2 đáp án đúng là Bô-rô-bu-đua; (d) thứ tự lựa chọn xáo trộn; (e) 4 lựa chọn cho hai ảnh nên có thể loại trừ |
+C4: Sửa họ tên/lớp/trường ở Chặng 5 | Cập nhật state `student` chung; thẻ dùng giá trị đã sửa; vẫn kiểm tra "Vui lòng nhập đầy đủ họ và tên, lớp, trường." 
+C5: Thứ tự kiểm tra ở Chặng 5 | (1) trường thông tin rỗng, (2) mật mã rỗng, (3) đóng góp ngoài 30-50 từ; nếu có lỗi thì hiện thông báo tại trường kèm "Vui lòng kiểm tra lại thông tin trước khi tạo thẻ.", không xóa dữ liệu; chỉ khi hợp lệ mới so khớp mật mã (sai thì màn hình thất bại một lần)
+C6: Điều kiện tạo thẻ | Chặng 1-4 đã hoàn thành, thông tin hợp lệ, đóng góp 30-50 từ, mật mã đúng; không yêu cầu đủ 4 mảnh
+C7: Cộng điểm và lỗi số thực | Lưu theo nửa điểm (số nguyên); tổng chặn trên 100; lời khen khi tổng đúng 100
+C8: Lỗi trong SCORING_RULES lần 1 (Chặng 4 ghi 3-10) | Đã sửa thành 4-10
+C9: Đếm từ B22 tính cả ký hiệu đứng riêng (ví dụ "-") là một từ | Chấp nhận theo D
+C10: Luồng Chặng 5 theo B21 | Bước 1 thông tin, Bước 2 mật mã và ý tưởng, Bước 3 xem trước (điểm và lời chúc), Bước 4 xuất PNG và tái khởi động
+C11: Phòng 1: một tủ có nhận nhiều hiện vật không | Mỗi tủ nhận đúng một hiện vật; đặt vào tủ đã có thì hoán đổi
+
+## H. Trạng thái sau phần G (cập nhật lần 3)
+
+Phần A-G được giữ nguyên.
+
+### H1. Đã xác nhận
+
+| # | Nội dung | Cách áp dụng |
+|---|---|---|
+| C1 | Mảnh mật mã và mật mã | Chặng 5 chỉ hiển thị mảnh đã nhận; mảnh chưa nhận là ô trống; người chơi có thể đoán; phải nhập đúng mật mã mới hoàn thành Chặng 5; không thêm luật |
+| C2 | Chặng 1 một nút "Hoàn thành" cho 2 ảnh | Áp dụng E1.4, thay B5 |
+| C3 | Chính tả, đáp án đúng, xáo trộn | "Wat Rong Khun", "Shwedagon", "Bô-rô-bu-đua"; ảnh 1 đúng Angkor Wat, ảnh 2 đúng Bô-rô-bu-đua; thứ tự lựa chọn xáo trộn; chấp nhận khả năng loại trừ |
+| C4-C11 | Sửa thông tin ở Chặng 5, thứ tự kiểm tra, điều kiện tạo thẻ, nửa điểm, lỗi SCORING_RULES, đếm từ, luồng 4 bước, một tủ một hiện vật | Áp dụng đúng nội dung ở E2 |
+| B1 | Dữ liệu Chặng 1 | Đã đủ; Chặng 1 không còn bị chặn |
+
+### H2. Đề xuất, chờ người dùng xem lại (không chặn triển khai)
+
+| # | Nội dung | Đề xuất hiện dùng |
+|---|---|---|
+| H2.1 | G.C3b chỉ ghi "trái quy tắc hiển thị Bô-rô-bu-đua và Chặng 3 gọi là Đền" | Nhãn: "Đền Bô-rô-bu-đua (Indonesia)". Các nhãn khác: "Đền Angkor Wat (Campuchia)", "Chùa Shwedagon (Myanmar)", "Đền Wat Rong Khun (Thái Lan)" (giữ "Đền" theo dữ liệu người dùng, chỉ sửa chính tả) |
+| H2.2 | Chữ cho ô mảnh trống | "Chưa nhận" (không emoji) |
+| H2.3 | Chữ giao diện bổ sung E4 (hộp xác nhận tái khởi động, ghi chú A-ru-na) | Dùng bản đề xuất ở E4 |
+| H2.4 | Phạm vi xáo trộn | Chỉ lựa chọn Chặng 1 (mỗi ảnh xáo riêng) và các chỗ tài liệu ghi xáo trộn/ngẫu nhiên (Ngân hàng thẻ Chặng 2, hiện vật Phòng 1). Lựa chọn Chặng 3 giữ thứ tự tài liệu |
+| H2.5 | `.gitignore` do người dùng tạo có dòng lỗi mã hóa và dấu `/` đầu dòng nên không loại được file khóa Word `~$...docx` | Bước S1 thay bằng `~$*` và thêm `node_modules`, `dist` |
+
+### H3. Điều kiện trước khi viết tính năng
+
+Không còn mục nào bị chặn. Các mục ở H2 chỉ ảnh hưởng chữ hiển thị và được gom trong `src/content/` để sửa nhanh.

@@ -44,7 +44,8 @@ Nguyên tắc: dữ liệu câu hỏi/đáp án, hàm chấm điểm (thuần, k
 - `GameState`: `screen`, `student {name, className, school}`, `stages[1..5].status` (`locked | in_progress | completed`), `answers` theo chặng, `scores {s1..s4}`, `fragments`, `ambassador {code, action, avatarUrl}`, `cardIssuedAt`.
 - Điểm do hàm thuần tính từ `answers` khi hoàn thành chặng, lưu một lần; action hoàn thành bị bỏ qua nếu chặng đã `completed` (chống cộng hai lần, khóa đáp án).
 - Điểm lưu theo đơn vị nửa điểm bằng số nguyên (2,5 điểm = 5); hàm định dạng hiển thị dấu phẩy kiểu Việt. Tổng điểm = tổng `s1..s4`, chặn trên 100; Chặng 5 không có điểm.
-- Dữ liệu Chặng 1 có cấu trúc `{ imageId, options: [{id, label}], correctOptionId: string | null }`. Hiện `correctOptionId` để trống cho đến khi C3 được xác nhận; hàm kiểm tra `isStage1DataReady()` báo thiếu dữ liệu; dữ liệu giả chỉ nằm trong test, không nằm trong `src/content`.
+- Dữ liệu Chặng 1: `{ imageId, options: [{id, label}], correctOptionId }` với 4 lựa chọn dùng chung (angkor-wat, borobudur, shwedagon, wat-rong-khun); ảnh 1 đúng là `angkor-wat`, ảnh 2 đúng là `borobudur`. Thứ tự lựa chọn được xáo một lần khi vào chặng (hàm `shuffle` nhận RNG tiêm được để test), lưu trong state, xáo lại khi RESET; chấm điểm theo `optionId`; nhãn A-D gán sau khi xáo. Chặng 3 giữ thứ tự tài liệu.
+- Bảng mảnh mật mã (`CipherFragments`) luôn hiển thị 4 ô theo thứ tự DI, SẢN, KẾT NỐI, TƯƠNG LAI; mảnh chưa nhận là ô trống (khung CSS, không emoji, không hiển thị toàn văn mật mã); dùng lại ở Bước 2 Chặng 5.
 - `RESET` (sau xác nhận) trả về trạng thái ban đầu và thu hồi `URL.createObjectURL` của ảnh chân dung. Ảnh chân dung chỉ ở trình duyệt, không tải lên đâu.
 
 ## 5. Danh sách ảnh cần có
@@ -100,26 +101,27 @@ Lệnh: `npm test`, `npx tsc --noEmit`, `npm run build` - chỉ báo kết quả
 
 | Bước | Nội dung | Tiêu chí hoàn thành | Lệnh kiểm tra |
 |---|---|---|---|
-| S0 | Cập nhật 3 tài liệu theo phần D | `PROJECT_PLAN.md`, `SCORING_RULES.md`, `OPEN_QUESTIONS.md` (E, F) cập nhật; B1/C-mục ghi rõ chờ xác nhận; không emoji | Quét emoji bằng `Select-String` kết quả 0; `git diff --stat` |
-| S1 | Khởi tạo Vite + React + TS vào thư mục tạm rồi chép sang (không ghi đè `docs/`, `.docx`); thêm `.gitignore` (node_modules, dist); `base: '/weblichsu/'`; Vitest + Testing Library | Có `package.json`, `src/`, test mẫu xanh; `dist/index.html` trỏ asset dưới `/weblichsu/` | `npm run typecheck`, `npm test`, `npm run build`, kiểm tra `dist/index.html` bằng `Select-String '/weblichsu/'` |
+| S0 | Cập nhật 3 tài liệu theo phần D và G (đã làm, commit riêng) | `PROJECT_PLAN.md`, `SCORING_RULES.md`, `OPEN_QUESTIONS.md` (E-H) cập nhật; mục đề xuất chờ duyệt ghi rõ; không emoji | Quét emoji bằng `Select-String` kết quả 0; `git diff --stat` |
+| S1 | Khởi tạo Vite + React + TS vào thư mục tạm rồi chép sang (không ghi đè `docs/`, `.docx`); sửa `.gitignore` (dòng lỗi mã hóa thành `~$*`, thêm `node_modules`, `dist`); `base: '/weblichsu/'`; Vitest + Testing Library | Có `package.json`, `src/`, test mẫu xanh; `dist/index.html` trỏ asset dưới `/weblichsu/`; `git status` không hiện file `~$*` | `npm run typecheck`, `npm test`, `npm run build`, kiểm tra `dist/index.html` bằng `Select-String '/weblichsu/'`, `git status -s` |
 | S2 | Kiểu dữ liệu, `config/scoring.ts`, định dạng điểm nửa điểm/dấu phẩy | Test định dạng (5 đơn vị nửa điểm -> "2,5"; 75 -> "37,5"; 80 -> "40") xanh | `npm test` |
-| S3 | Chấm Chặng 1 (dùng fixture chỉ trong test) | Test: đúng ở 1/2/3/4 ô, sai, 0 ô bị từ chối, hai ảnh, khóa sau hoàn thành, các mốc 20/16-18/8-14/dưới 8 | `npm test` |
+| S3 | Chấm Chặng 1 (hàm thuần, độc lập với giao diện) | Test: đúng ở 1/2/3/4 ô, sai, 0 ô bị từ chối, hai ảnh, khóa sau hoàn thành, các mốc 20/16-18/8-14/dưới 8, đúng theo `optionId` | `npm test` |
 | S4 | Chấm Chặng 2 | Test 0, 2, 14, 16, 28, 30; mảnh SẢN từ 16; thẻ chưa đặt = 0 | `npm test` |
 | S5 | Chấm Chặng 3 | Test từng phòng, 0, 40, 15, 37,5; mảnh KẾT NỐI từ 15 | `npm test` |
 | S6 | Chấm Chặng 4 | Test 4 nhân vật, 0-3 thẻ, A/B/C, min 4, max 10, không cộng lặp | `npm test` |
-| S7 | Tổng điểm, mảnh mật mã, `cipher.ts`, `wordCount.ts`, điều kiện tạo thẻ | Test tổng không vượt 100, Chặng 5 cộng 0, so khớp mật mã (NFC, hoa/thường, khoảng trắng, dấu), đếm 29/30/50/51 từ | `npm test` |
+| S7 | Tổng điểm, mảnh mật mã (kèm trạng thái ô trống), `cipher.ts`, `wordCount.ts`, điều kiện tạo thẻ | Test tổng không vượt 100, Chặng 5 cộng 0, so khớp mật mã (NFC, hoa/thường, khoảng trắng, dấu), đếm 29/30/50/51 từ, mảnh chưa nhận là rỗng | `npm test` |
+| S7a | `shuffle.ts` (Fisher-Yates, RNG tiêm được) | Test: là hoán vị hợp lệ, không mất/trùng phần tử, không đổi mảng gốc, kết quả xác định khi cùng seed | `npm test` |
 | S8 | Reducer + Context | Test chống cộng điểm hai lần, khóa chặng, gating, RESET, bấm hoàn thành liên tục | `npm test`, `npm run typecheck` |
-| S9 | Nội dung nguyên văn từ docx cho Chặng 2-5 và phần cố định Chặng 1, áp dụng sổ sửa chính tả (E3) | Test đếm: 15 thẻ, 4 từ Phòng 2, 4 câu Phòng 3, 3 phương án; không còn "Hin đu", "ĐẠO SỨ"; Chặng 1 `correctOptionId` rỗng | `npm test` |
+| S9 | Nội dung nguyên văn từ docx cho Chặng 2-5 và Chặng 1 (4 lựa chọn đã sửa chính tả, đáp án đúng), áp dụng sổ sửa chính tả (E3) | Test đếm: 15 thẻ, 4 từ Phòng 2, 4 câu Phòng 3, 3 phương án, 4 lựa chọn Chặng 1 và đúng 1 đáp án đúng mỗi ảnh; không còn "Hin đu", "ĐẠO SỨ", "War Rong", "Shwedagob", "Borobudur" trong nội dung giao diện | `npm test` |
 | S10 | `config/assets.ts`, 11 file placeholder trung tính khác tên (và nền tùy chọn), `docs/IMAGE_ASSETS.md` | Test tên file duy nhất, file tồn tại, đường dẫn dùng `BASE_URL` | `npm test`, `npm run build` |
 | S11 | Khung giao diện: giới thiệu, form thông tin (B26, B31), tiến trình, bảng mảnh mật mã, hộp xác nhận tái khởi động | Test hành vi: nút disabled khi thiếu thông tin, thông báo đúng tại trường, xác nhận trước khi reset | `npm test`, `npm run build` |
-| S12 | UI Chặng 1 (chỉ sau khi C2, C3 được xác nhận) | Hai ảnh cùng lúc, Hoàn thành chỉ sáng khi đủ điều kiện, khóa sau hoàn thành | `npm test`, `npm run build` |
+| S12 | UI Chặng 1: hai ảnh cùng lúc, lựa chọn xáo trộn | Hoàn thành chỉ sáng khi mỗi ảnh đã mở ít nhất 1 ô và đã chọn; khóa sau hoàn thành; không lộ đáp án khi sai; chấm đúng dù thứ tự đã xáo | `npm test`, `npm run build` |
 | S13 | UI Chặng 2 (kéo thả và chọn thẻ rồi chọn giai đoạn) | Test chọn thẻ, đặt thẻ, hoàn thành khi chưa đặt hết, khóa | `npm test`, `npm run build` |
-| S14 | UI Chặng 3 (3 phòng tuần tự; Phòng 1 sau khi C11 được xác nhận) | Test thứ tự phòng, bắt buộc đủ mục, không hiện điểm phòng khi chơi, tổng kết kèm điểm từng phòng | `npm test`, `npm run build` |
+| S14 | UI Chặng 3 (3 phòng tuần tự; Phòng 1 mỗi tủ một hiện vật, hoán đổi khi đặt vào tủ đã có) | Test thứ tự phòng, bắt buộc đủ mục, không hiện điểm phòng khi chơi, tổng kết kèm điểm từng phòng | `npm test`, `npm run build` |
 | S15 | UI Chặng 4 | Test chọn nhân vật + phương án mới hoàn tất, thẻ chứng cứ tùy chọn, ghi chú tình huống giả định | `npm test`, `npm run build` |
-| S16 | Chặng 5: form, kiểm tra hợp lệ (B21-B26), màn hình thất bại (sau khi C1, C4, C5 được xác nhận) | Test thông báo đúng 4 câu, không xóa dữ liệu khi lỗi, sai mật mã chỉ có nút tái khởi động | `npm test`, `npm run build` |
+| S16 | Chặng 5: 4 bước, sửa thông tin, ô mảnh trống, kiểm tra hợp lệ (B21-B26, thứ tự C5), màn hình thất bại | Test thông báo đúng 4 câu, không xóa dữ liệu khi lỗi, sai mật mã chỉ có nút tái khởi động, đoán đúng mật mã khi thiếu mảnh vẫn tạo được thẻ | `npm test`, `npm run build` |
 | S17 | Thẻ Đại sứ + xuất PNG bằng `html-to-image` | Test ngày dd/mm/yyyy, lời khen 100 và dưới 100, 50 từ không bị cắt; thử xuất trên trình duyệt thật | `npm test`, `npm run build` và thử thủ công |
 | S18 | Test tĩnh | Không có `localStorage`, `sessionStorage`, `document.cookie`, `indexedDB`, `fetch`, `XMLHttpRequest`, QR, emoji trong `src` | `npm test` |
 | S19 | Workflow GitHub Pages | `.github/workflows/deploy.yml` hợp lệ; `vite preview` phục vụ đúng ở đường dẫn con | `npm run build`, `curl http://localhost:4173/weblichsu/` |
 | S20 | Kiểm tra cuối | Tất cả lệnh chung xanh, quét tĩnh sạch; chỉ báo kết quả đã thực sự chạy | `npm run typecheck`, `npm test`, `npm run build` |
 
-Các bước không bị chặn bởi xác nhận: S1-S11, S13, S15, S17-S20 (phần không liên quan Chặng 1, Phòng 1, Chặng 5). Xem phần F của `OPEN_QUESTIONS.md` về các điều kiện tiên quyết còn lại.
+Không còn bước nào bị chặn bởi câu hỏi chưa xác nhận. Các mục đề xuất chờ duyệt (nhãn "Đền Bô-rô-bu-đua", chữ "Chưa nhận", chữ giao diện E4) được gom trong `src/content/uiText.ts` và `src/content/stage1.ts` để sửa nhanh; xem phần H của `OPEN_QUESTIONS.md`.
