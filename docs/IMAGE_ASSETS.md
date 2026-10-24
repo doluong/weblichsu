@@ -15,7 +15,7 @@ Ghi chú:
 - Giữ nguyên tên file kể cả khi ảnh đã là ảnh thật (hậu tố `-placeholder` chỉ là tên). Nếu muốn đổi tên hoặc dùng định dạng khác (PNG, WebP), hãy sửa duy nhất trường `file` tương ứng trong `src/config/assets.ts`.
 - Ảnh được hiển thị theo tỷ lệ khung (cột "Tỷ lệ"), cắt vừa khung (`object-fit: cover`). Nên chụp/cắt đúng tỷ lệ và để chủ thể ở giữa.
 - Nên giữ mỗi ảnh dưới khoảng 300 KB để trang tải nhanh trên điện thoại.
-- Ở chế độ `npm run dev`, mỗi ảnh có chú thích "Ảnh giữ chỗ: <tên file>" để dễ nhận biết; chú thích này không có trong bản build.
+- Ở chế độ `npm run dev`, mỗi ảnh có chú thích "Tệp ảnh: <tên file>" để dễ nhận biết; chú thích này không có trong bản build.
 - Chỉ dùng ảnh bạn có quyền sử dụng. Không dùng một ảnh cho nhiều vị trí.
 
 ## Danh sách ảnh

@@ -52,6 +52,7 @@ export function Room1({ locked }: { locked: boolean }) {
 
   return (
     <div className="room-body">
+      <ImageSlot imageKey="museumRoomBackground" alt="" className="room__banner" />
       {!locked && <p className="status-line">{UI_TEXT.stage3Room1Hint}</p>}
       <ul className="cabinets">
         {ROOM1_CABINETS.map((cabinet) => {

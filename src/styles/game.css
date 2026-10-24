@@ -280,6 +280,21 @@ fieldset:disabled .option {
   gap: 1rem;
 }
 
+/* Banner trang trí đầu Phòng 1 (ảnh nền bảo tàng): cắt thấp hơn tỷ lệ gốc để không chiếm chỗ */
+.room__banner {
+  aspect-ratio: 21 / 7 !important;
+}
+
+.room__banner img {
+  object-position: center 60%;
+}
+
+@media (max-width: 639px) {
+  .room__banner {
+    aspect-ratio: 16 / 9 !important;
+  }
+}
+
 .cabinet__slot {
   display: grid;
 }

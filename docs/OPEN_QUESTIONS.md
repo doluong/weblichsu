@@ -368,3 +368,10 @@ M2.5: Đồng ý
 M2.6: Đồng ý
 M2.7: Sửa lời dẫn "ghi danh vào Bảng Vàng Hội đồng Di sản" thành ""ghi danh vào Hội đồng Di sản".
 M2.8: Đồng ý
+
+## O. Áp dụng phần N
+
+- M2.1-M2.6 đã được xác nhận: giữ nguyên cách triển khai (giới hạn ảnh chân dung, khóa sau khi kiểm tra mật mã, Bước 3/4, tên file xuất, chữ giao diện Chặng 5, mật mã chuẩn trên thẻ).
+- M2.7: lời dẫn Chặng 5 đã sửa thành "... chính thức ghi danh vào Hội đồng Di sản!" (bỏ "Bảng Vàng"). Mâu thuẫn với B28 không còn.
+- Xuất PDF: không làm (người dùng đã hủy, thay cho M2.8 "chờ PNG ổn định").
+- Ảnh thật đã thay các ảnh giữ chỗ, đúng tỷ lệ khung. Ảnh nền bảo tàng được dùng làm banner trang trí đầu Phòng 1 (đề xuất của tôi; chờ người dùng xem lại).

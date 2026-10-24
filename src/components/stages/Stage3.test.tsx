@@ -63,6 +63,15 @@ describe('Chặng 3 - giao diện', () => {
     expect(complete).toBeDisabled()
   })
 
+  it('Phòng 1 có banner trang trí bằng ảnh nền bảo tàng (không phải nội dung câu hỏi)', async () => {
+    const user = renderApp()
+    await reachStage3(user)
+    const banner = document.querySelector('.room__banner img') as HTMLImageElement
+    expect(banner).not.toBeNull()
+    expect(banner.getAttribute('src')).toContain('museum-room-background-placeholder.jpg')
+    expect(banner.getAttribute('alt')).toBe('')
+  })
+
   it('hoán đổi khi đặt hiện vật vào tủ đã có', async () => {
     const user = renderApp()
     await reachStage3(user)

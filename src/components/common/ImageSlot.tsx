@@ -17,7 +17,7 @@ export function ImageSlot({ imageKey, alt, className = '', as = 'figure' }: Imag
       <img src={imageUrl(imageKey)} alt={alt} loading="lazy" decoding="async" />
       {import.meta.env.DEV && (
         <Caption className="image-slot__dev" aria-hidden="true">
-          Ảnh giữ chỗ: {imageFile(imageKey)}
+          Tệp ảnh: {imageFile(imageKey)}
         </Caption>
       )}
     </Wrapper>
