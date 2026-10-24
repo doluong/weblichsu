@@ -255,7 +255,7 @@ Phần A-G được giữ nguyên.
 
 | # | Nội dung | Đề xuất hiện dùng |
 |---|---|---|
-| H2.1 | G.C3b chỉ ghi "trái quy tắc hiển thị Bô-rô-bu-đua và Chặng 3 gọi là Đền" | Nhãn: "Đền Bô-rô-bu-đua (Indonesia)". Các nhãn khác: "Đền Angkor Wat (Campuchia)", "Chùa Shwedagon (Myanmar)", "Đền Wat Rong Khun (Thái Lan)" (giữ "Đền" theo dữ liệu người dùng, chỉ sửa chính tả) |
+| H2.1 | G.C3b chỉ ghi "trái quy tắc hiển thị Bô-rô-bu-đua và Chặng 3 gọi là Đền" | Người dùng đã chỉnh trong SCORING_RULES.md thành nhãn "Chùa Bô-rô-bu-đua (Indonesia)" (vẫn ghi đề xuất). Dùng nhãn này khi làm Chặng 1; các nhãn khác: "Đền Angkor Wat (Campuchia)", "Chùa Shwedagon (Myanmar)", "Đền Wat Rong Khun (Thái Lan)". Cần xác nhận cuối cùng "Chùa" hay "Đền" cho Bô-rô-bu-đua vì Chặng 3 gọi là "ngôi đền" |
 | H2.2 | Chữ cho ô mảnh trống | "Chưa nhận" (không emoji) |
 | H2.3 | Chữ giao diện bổ sung E4 (hộp xác nhận tái khởi động, ghi chú A-ru-na) | Dùng bản đề xuất ở E4 |
 | H2.4 | Phạm vi xáo trộn | Chỉ lựa chọn Chặng 1 (mỗi ảnh xáo riêng) và các chỗ tài liệu ghi xáo trộn/ngẫu nhiên (Ngân hàng thẻ Chặng 2, hiện vật Phòng 1). Lựa chọn Chặng 3 giữ thứ tự tài liệu |
@@ -264,3 +264,13 @@ Phần A-G được giữ nguyên.
 ### H3. Điều kiện trước khi viết tính năng
 
 Không còn mục nào bị chặn. Các mục ở H2 chỉ ảnh hưởng chữ hiển thị và được gom trong `src/content/` để sửa nhanh.
+
+## I. Phát hiện khi xây dựng khung giao diện (Bước 2)
+
+| # | Vấn đề | Cách xử lý tạm trong khung | Trạng thái |
+|---|---|---|---|
+| I1 | Lời dẫn Chặng 5 trong tài liệu kết thúc bằng "... chính thức ghi danh vào Bảng Vàng Hội đồng Di sản!", nhưng B28 cấm bảng vàng và nộp bài lên hệ thống tập trung. Hiển thị nguyên câu sẽ hứa một tính năng không có | Khung chỉ hiển thị phần đầu: "Sứ mệnh khôi phục bản đồ văn minh đã đi đến chặng cuối cùng!"; toàn văn lời dẫn vẫn nằm trong tài liệu nguồn | Chờ người dùng quyết định cách xử lý (bỏ câu, đổi nghĩa, hoặc giữ nguyên) |
+| I2 | Chữ giao diện bổ sung xuất hiện ở khung, không có trong tài liệu | Gom trong `src/content/uiText.ts`, ghi rõ nguồn: tiêu đề và hướng dẫn biểu mẫu ("Thông tin nhà thám hiểm", "Điền đầy đủ họ và tên, lớp, trường trước khi bắt đầu Chặng 1."), ghi chú lưu trong bộ nhớ ("Thông tin chỉ được giữ trong trình duyệt khi bạn đang chơi. Tải lại hoặc đóng trang sẽ bắt đầu lại từ đầu."), nút "Bắt đầu hành trình", "Bắt đầu Chặng 1", "Quay lại", "Chưa nhận", hộp xác nhận tái khởi động (E4), ghi chú khung "Khung giao diện. Luật chơi và tính điểm sẽ được bổ sung ở bước sau." và các nhãn khu vực giữ chỗ. Ghi chú khung sẽ bị xóa khi làm xong từng chặng | Đề xuất, chờ duyệt |
+| I3 | Lời dẫn Chặng 3 trong tài liệu có "hiện vật/ tư liệu" (thừa dấu cách) và không có dấu chấm cuối | Giữ nguyên văn như tài liệu vì không thuộc sổ sửa lỗi E3 | Chờ người dùng cho phép sửa nhẹ |
+| I4 | Khung Chặng 1 không đưa nội dung 4 lựa chọn và đáp án vào giao diện | Chỉ có khung tĩnh (ảnh, 4 ô che, vùng chọn đáp án); dữ liệu Chặng 1 sẽ làm ở bước chấm điểm Chặng 1 | Theo kế hoạch |
+| I5 | Bản build và test: Vitest dùng `BASE_URL` là `/`, không phải `/weblichsu/` | Test chỉ kiểm tra URL được dựng từ `BASE_URL`; đường dẫn `/weblichsu/` kiểm tra trên bản build (`dist/index.html`) | Đã xử lý |

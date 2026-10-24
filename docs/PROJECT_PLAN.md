@@ -67,7 +67,7 @@ Tất cả nằm trong `public/images/placeholders/`; người dùng thay bằng
 | portrait-default-placeholder.jpg | Chặng 5, ảnh chân dung mặc định | Không cần ảnh thật (thay thế nếu muốn) | 3:4 |
 | museum-room-background-placeholder.jpg (tùy chọn) | Chặng 3 Phòng 1, nền | Ảnh góc bảo tàng | 16:9 |
 
-Placeholder ở giai đoạn khung: file trung tính một màu, mỗi file màu và tên khác nhau, không vẽ hình; nhãn mô tả hiển thị bằng văn bản CSS. Chi tiết sẽ ghi trong `docs/IMAGE_ASSETS.md` ở giai đoạn sau.
+Placeholder: file màu phẳng, mỗi file một màu và một tên, không vẽ hình; chú thích tên file chỉ hiện ở chế độ `npm run dev`. Chi tiết và cách thay ảnh ở [IMAGE_ASSETS.md](./IMAGE_ASSETS.md).
 
 ## 6. Kiểm thử quy tắc tính điểm
 
@@ -98,6 +98,8 @@ Lệnh: `npm test`, `npx tsc --noEmit`, `npm run build` - chỉ báo kết quả
 - Lệnh kiểm tra chung (sau S1): `npm run typecheck` (`tsc -b`), `npm test` (`vitest run`), `npm run build` (`vite build`).
 
 ## 9. Lộ trình từng bước nhỏ
+
+Trạng thái: Bước 2 (khung giao diện) gộp một commit gồm S1, phần khung của S2/S8/S10/S11 (kiểu dữ liệu, reducer điều hướng, cấu hình ảnh, ảnh giữ chỗ, `IMAGE_ASSETS.md`, giao diện giới thiệu/biểu mẫu/5 khung chặng/hộp xác nhận) và các test tương ứng. Các bước chấm điểm S3-S7a, nội dung nguyên văn S9 và giao diện chơi S12-S17 chưa làm.
 
 | Bước | Nội dung | Tiêu chí hoàn thành | Lệnh kiểm tra |
 |---|---|---|---|

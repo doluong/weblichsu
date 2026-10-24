@@ -1,0 +1,29 @@
+:root {
+  --ink: #14232f;
+  --ink-soft: #1f3646;
+  --ink-line: #34495a;
+  --ivory: #f7f1e5;
+  --parchment: #efe5d0;
+  --paper: #fffdf8;
+  --gold: #b8893a;
+  --gold-light: #e0bd78;
+  --gold-text: #7a5513;
+  --terracotta: #a64b32;
+  --jade: #2f6f64;
+  --text: #1c2a33;
+  --muted: #4f5f6a;
+  --line: #d9ccb0;
+  --danger: #9d2a2a;
+  --focus: #1a5fb4;
+
+  --radius: 14px;
+  --radius-small: 8px;
+  --shadow: 0 10px 30px rgba(20, 35, 47, 0.12);
+  --shadow-small: 0 2px 8px rgba(20, 35, 47, 0.1);
+
+  --font-body: 'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Playfair Display Variable', Georgia, 'Times New Roman', serif;
+
+  --content-width: 1120px;
+  --tap: 44px;
+}

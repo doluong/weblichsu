@@ -40,11 +40,11 @@ Quyết định (D: B2-B5, E1):
 | Mã lựa chọn | Nhãn hiển thị | Ảnh 1 | Ảnh 2 |
 |---|---|---|---|
 | angkor-wat | Đền Angkor Wat (Campuchia) | đúng | sai |
-| borobudur | Đền Bô-rô-bu-đua (Indonesia) **[ĐỀ XUẤT]** | sai | đúng |
+| borobudur | Chùa Bô-rô-bu-đua (Indonesia) **[ĐỀ XUẤT]** | sai | đúng |
 | shwedagon | Chùa Shwedagon (Myanmar) | sai | sai |
 | wat-rong-khun | Đền Wat Rong Khun (Thái Lan) | sai | sai |
 
-Nhãn đã sửa chính tả: "Wat Rong Khun" (nguồn người dùng ghi "War"), "Shwedagon" (ghi "Shwedagob"), "Bô-rô-bu-đua" theo E1.5. Việc dùng "Đền" thay "Chùa" cho Bô-rô-bu-đua là cách hiểu của G.C3b, **[ĐỀ XUẤT]** chờ duyệt.
+Nhãn đã sửa chính tả: "Wat Rong Khun" (nguồn người dùng ghi "War"), "Shwedagon" (ghi "Shwedagob"), "Bô-rô-bu-đua" theo E1.5. Việc dùng "Chùa" thay "Đền" cho Bô-rô-bu-đua **[ĐỀ XUẤT]**
 
 Thông báo và phần thưởng (điểm tổng kết của chặng):
 
@@ -148,7 +148,7 @@ Quyết định (D: B17-B20):
 |---|---|---|
 | C1 | Có thể không nhận một số mảnh (điểm thấp) nhưng phải nhập đúng cả mật mã, chỉ một lần | Đã xác nhận (G): chỉ hiển thị mảnh đã nhận, mảnh chưa nhận là ô trống; người chơi có thể đoán; không thêm luật |
 | C2 | Chặng 1: B5 (chốt từng ảnh) và E1.4 (một nút Hoàn thành cho cả hai ảnh) | Đã xác nhận (G): áp dụng E1.4 |
-| C3 | Chặng 1: chính tả tên riêng, đáp án đúng, thứ tự lựa chọn | Đã xác nhận (G); nhãn "Đền Bô-rô-bu-đua" là đề xuất chờ duyệt |
+| C3 | Chặng 1: chính tả tên riêng, đáp án đúng, thứ tự lựa chọn | Đã xác nhận (G); nhãn "Chùa Bô-rô-bu-đua" là đề xuất chờ duyệt |
 | C6 | Thẻ không yêu cầu đã đủ 4 mảnh | Theo đúng tài liệu và D |
 | C7 | Tổng dùng nửa điểm, tối đa 100, không vượt | Nhất quán: 20 + 30 + 40 + 10 = 100 |
 | C12 | Mọi tổng khả dụng của Chặng 1, 2, 3 đều thuộc đúng một mốc | Không có khoảng chưa quy định |
