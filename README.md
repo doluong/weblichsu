@@ -42,7 +42,16 @@ Trên Windows PowerShell, nếu lệnh `npm` báo bị chặn chạy script, hã
 
 ## Triển khai GitHub Pages
 
-Sau khi build, nội dung thư mục `dist/` được phục vụ ở `https://<tài khoản>.github.io/weblichsu/`. Workflow triển khai tự động sẽ được thêm ở bước sau. Dự án hiện chưa có remote Git và chưa được push.
+Workflow [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) tự động cài đặt, kiểm tra kiểu, chạy test, build và đưa thư mục `dist/` lên GitHub Pages mỗi khi push lên nhánh `master` hoặc `main` (hoặc chạy thủ công ở tab Actions). Trang chạy tại `https://<tài khoản>.github.io/weblichsu/`.
+
+Các bước làm một lần (bạn tự thực hiện; dự án không tự push):
+
+1. Tạo repository GitHub tên `weblichsu` (tên này khớp `base: '/weblichsu/'` trong `vite.config.ts`; nếu đặt tên khác, phải sửa `base`).
+2. Thêm remote và push: `git remote add origin https://github.com/<tài khoản>/weblichsu.git`, sau đó `git push -u origin master`.
+3. Trên GitHub: Settings > Pages > Build and deployment > Source = **GitHub Actions**.
+4. Chờ workflow "Deploy to GitHub Pages" chạy xong rồi mở địa chỉ trang.
+
+Không cần backend, API, cơ sở dữ liệu hay dịch vụ trả phí.
 
 ## Ràng buộc kỹ thuật
 
