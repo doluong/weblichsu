@@ -8,6 +8,7 @@ import '@fontsource-variable/playfair-display/wght.css'
 import './styles/tokens.css'
 import './styles/global.css'
 import './styles/components.css'
+import './styles/game.css'
 import App from './App'
 import { GameProvider } from './state/GameProvider'
 

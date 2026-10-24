@@ -1,6 +1,5 @@
 import { getStage, type ScoredStageId } from '../config/stages'
 import { STAGE1_IMAGES } from '../content/stage1'
-import { STAGE2_CARDS } from '../content/stage2'
 import { STAGE3_KEYS } from '../content/stage3'
 import { STAGE1_RESULTS, STAGE2_RESULTS, STAGE3_RESULTS, STAGE4_RESULT, type ResultText } from '../content/results'
 import { countOpenedTiles, scoreStage1, stage1Tier } from './scoring/stage1'
@@ -84,5 +83,5 @@ export function getBreakdown(state: GameState, stage: ScoredStageId): BreakdownL
       { label: 'Bỏ phiếu phương án hành động', score: detail.vote, maxPoints: 5 },
     ]
   }
-  return [{ label: `Số thẻ xếp đúng: ${state.scores[2]! / 4}/${STAGE2_CARDS.length}`, score: state.scores[2]!, maxPoints: 30 }]
+  return []
 }

@@ -1,0 +1,176 @@
+/* ---------- Lựa chọn (radio) ---------- */
+.options {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.options__legend {
+  padding: 0;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: var(--tap);
+  padding: 0.5rem 0.8rem;
+  background: #fff;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-small);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  touch-action: manipulation;
+}
+
+.option:hover {
+  border-color: var(--gold);
+}
+
+.option:focus-within {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.option.is-selected {
+  border-color: var(--ink);
+  background: #f3ecdc;
+}
+
+.option input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.option__letter {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: var(--parchment);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.option.is-selected .option__letter {
+  background: var(--ink);
+  color: var(--gold-light);
+}
+
+fieldset:disabled .option {
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+/* ---------- Chặng 1: ô che ảnh ---------- */
+.mystery__tile {
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  touch-action: manipulation;
+}
+
+.mystery__tile:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.mystery__tile:disabled {
+  cursor: default;
+}
+
+.mystery__tile.is-open {
+  background: transparent;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.mystery__count {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* ---------- Kết quả chặng ---------- */
+.result {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding: 1.25rem;
+  background: var(--paper);
+  border: 2px solid var(--jade);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-small);
+  animation: screen-in 0.35s ease both;
+}
+
+.result:focus {
+  outline: none;
+}
+
+.result__title {
+  font-size: 1.3rem;
+  color: var(--ink);
+}
+
+.result__score {
+  font-size: 1.1rem;
+}
+
+.result__score strong {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--jade);
+}
+
+.result__message {
+  font-weight: 600;
+}
+
+.result__reward {
+  display: inline-block;
+  justify-self: start;
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
+.result__breakdown {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.6rem 0.8rem;
+  background: var(--parchment);
+  border-radius: var(--radius-small);
+  font-size: 0.925rem;
+}
+
+.result__breakdown li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.result__total {
+  color: var(--muted);
+}
+
+.result__total strong {
+  color: var(--ink);
+}
+
+.result .btn {
+  justify-self: start;
+}

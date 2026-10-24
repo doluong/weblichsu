@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react'
 import { ConfirmDialog } from './components/layout/ConfirmDialog'
 import { DevStageNav } from './components/layout/DevStageNav'
 import { Header } from './components/layout/Header'
+import { createShuffles } from './game/shuffle'
 import { InfoScreen } from './components/screens/InfoScreen'
 import { IntroScreen } from './components/screens/IntroScreen'
 import { StageScreen } from './components/screens/StageScreen'
@@ -29,7 +30,7 @@ export default function App() {
         {state.screen === 'info' && (
           <InfoScreen
             initial={state.student}
-            onSubmit={(student) => dispatch({ type: 'SUBMIT_INFO', student })}
+            onSubmit={(student) => dispatch({ type: 'SUBMIT_INFO', student, shuffles: createShuffles() })}
             onBack={() => dispatch({ type: 'BACK_TO_INTRO' })}
           />
         )}

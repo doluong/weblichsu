@@ -34,4 +34,8 @@ export const UI_TEXT = {
   schoolLabel: 'Trường',
   stageSkeletonNote: 'Khung giao diện. Luật chơi và tính điểm sẽ được bổ sung ở bước sau.',
   stageCompleteDisabled: 'Hoàn thành',
+  // Nút "Hoàn thành" theo tài liệu; gợi ý và thông báo khóa là đề xuất (OPEN_QUESTIONS K1)
+  stageComplete: 'Hoàn thành',
+  stage1Hint: 'Mỗi ảnh cần mở ít nhất 1 ô và chọn một đáp án trước khi hoàn thành.',
+  stage1Locked: 'Chặng 1 đã hoàn thành, các câu trả lời đã được khóa.',
 } as const

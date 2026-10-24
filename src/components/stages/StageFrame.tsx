@@ -7,10 +7,12 @@ import { Button } from '../common/Button'
 interface StageFrameProps {
   stageId: StageId
   children: ReactNode
+  // Nếu không truyền, hiển thị chân trang của khung giao diện chưa triển khai.
+  footer?: ReactNode
 }
 
-// Khung chung cho mỗi chặng: tiêu đề, lời dẫn nguyên văn, vùng nội dung và nút hoàn thành (chưa hoạt động).
-export function StageFrame({ stageId, children }: StageFrameProps) {
+// Khung chung cho mỗi chặng: tiêu đề, lời dẫn nguyên văn, vùng nội dung và chân trang.
+export function StageFrame({ stageId, children, footer }: StageFrameProps) {
   const stage = getStage(stageId)
   return (
     <article className="stage" aria-labelledby={`stage-${stageId}-title`}>
@@ -24,11 +26,15 @@ export function StageFrame({ stageId, children }: StageFrameProps) {
       <p className="stage__intro">{STAGE_INTROS[stageId]}</p>
       <div className="stage__body">{children}</div>
       <footer className="stage__footer">
-        <p className="stage__note">{UI_TEXT.stageSkeletonNote}</p>
-        {stageId !== 5 && (
-          <Button disabled aria-disabled="true">
-            {UI_TEXT.stageCompleteDisabled}
-          </Button>
+        {footer ?? (
+          <>
+            <p className="stage__note">{UI_TEXT.stageSkeletonNote}</p>
+            {stageId !== 5 && (
+              <Button disabled aria-disabled="true">
+                {UI_TEXT.stageCompleteDisabled}
+              </Button>
+            )}
+          </>
         )}
       </footer>
     </article>
