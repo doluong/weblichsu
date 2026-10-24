@@ -10,7 +10,7 @@ export const STAGE_INTROS: Record<number, string> = {
   2: 'Em hãy kéo thả các thẻ Vương quốc, Sự kiện vào đúng vị trí trên Trục thời gian Đông Nam Á để mở khóa mảnh mật mã tiếp theo.',
   3: 'Chào mừng các nhà thám hiểm đến với Bảo tàng Di sản Đông Nam Á! Em hãy lần lượt bước vào 3 Phòng trưng bày: phân biệt các hiện vật/tư liệu, khôi phục văn bản và khám phá các điểm nóng kiến trúc để thu thập mảnh mật mã thứ ba.',
   4: 'CẢNH BÁO KHẨN CẤP: Quần thể di sản cổ Thánh địa A-ru-na đang đứng trước nguy cơ sụp đổ nghiêm trọng do tác động của thiên tai và áp lực quá tải từ hàng triệu lượt khách du lịch mỗi năm. Hội đồng Di sản quyết định triệu tập một Phiên họp Khẩn cấp! Các em hãy đảm nhận các vai trò chuyên gia, nghiên cứu hồ sơ chứng cứ và tranh luận để đưa ra Quyết nghị cứu nguy cho di sản!',
-  5: 'Sứ mệnh khôi phục bản đồ văn minh đã đi đến chặng cuối cùng! Hãy kích hoạt Mật mã, khởi tạo chiếc Thẻ Đại Sứ Di Sản Số mang dấu ấn cá nhân và chính thức ghi danh vào Bảng Vàng Hội đồng Di sản!',
+  5: 'Sứ mệnh khôi phục bản đồ văn minh đã đi đến chặng cuối cùng! Hãy kích hoạt Mật mã, khởi tạo chiếc Thẻ Đại Sứ Di Sản Số mang dấu ấn cá nhân và chính thức ghi danh vào Hội đồng Di sản!',
 }
 
 export const STAGE3_ROOMS = [

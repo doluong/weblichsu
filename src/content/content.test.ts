@@ -150,8 +150,9 @@ describe('thông báo và lời dẫn', () => {
     expect(STAGE_INTROS[3].endsWith('mảnh mật mã thứ ba.')).toBe(true)
   })
 
-  it('lời dẫn Chặng 5 giữ toàn văn tài liệu (J.I1)', () => {
-    expect(STAGE_INTROS[5]).toContain('chính thức ghi danh vào Bảng Vàng Hội đồng Di sản!')
+  it('lời dẫn Chặng 5 đã bỏ "Bảng Vàng" theo N.M2.7', () => {
+    expect(STAGE_INTROS[5]).toContain('chính thức ghi danh vào Hội đồng Di sản!')
+    expect(STAGE_INTROS[5]).not.toContain('Bảng Vàng')
   })
 
   it('mọi ảnh được dùng đều đã khai báo trong cấu hình ảnh', () => {

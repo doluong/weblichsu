@@ -87,6 +87,7 @@ describe('khung giao diện', () => {
     expect(screen.getByText('Không tính điểm')).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Bước 1: Thông tin Đại sứ' })).toBeInTheDocument()
     expect(screen.getByText(/Sứ mệnh khôi phục bản đồ văn minh/)).toBeInTheDocument()
-    expect(screen.getByText(/Bảng Vàng Hội đồng Di sản/)).toBeInTheDocument()
+    expect(screen.getByText(/ghi danh vào Hội đồng Di sản!/)).toBeInTheDocument()
+    expect(screen.queryByText(/Bảng Vàng/)).not.toBeInTheDocument()
   })
 })
