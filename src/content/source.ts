@@ -35,35 +35,11 @@ export const STAGE3_ROOMS = [
   },
 ] as const
 
-export const STAGE3_CABINETS = ['Tín ngưỡng bản địa', 'Hindu giáo', 'Phật giáo', 'Hồi giáo'] as const
-
-export const STAGE3_BUILDINGS = [
-  'Đền Angkor Wat (Campuchia)',
-  'Quần thể Bô-rô-bu-đua (Indonesia)',
-  'Cố đô Ayutthaya (Thái Lan)',
-  'Thánh địa Mỹ Sơn (Việt Nam)',
-] as const
-
-export const STAGE2_PERIODS = ['Đầu CN – Thế kỷ VII', 'Thế kỷ VII – XV', 'Thế kỷ XVI – XIX'] as const
-
 export const STAGE4_HEADINGS = {
   roles: 'HÃY CHỌN THẺ NHÂN VẬT',
   evidence: 'MỞ THẺ HỒ SƠ KHẨN CẤP',
   vote: 'BỎ PHIẾU PHƯƠNG ÁN HÀNH ĐỘNG',
 } as const
-
-export const STAGE4_ROLES = [
-  'Nhà Sử học',
-  'Chuyên gia Bảo tồn',
-  'Đại diện Cộng đồng Địa phương',
-  'Chuyên gia Du lịch & Kinh tế',
-] as const
-
-export const STAGE4_EVIDENCE_TITLES = [
-  'Thẻ 1 - Báo cáo Kỹ thuật',
-  'Thẻ 2 - Báo cáo Kinh tế & Du lịch',
-  'Thẻ 3 - Khảo sát Cộng đồng',
-] as const
 
 export const STAGE5_STEPS = [
   'Thông tin Đại sứ',

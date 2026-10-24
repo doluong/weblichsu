@@ -359,3 +359,30 @@ fieldset:disabled .option {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* ---------- Chặng 4: hồ sơ khẩn cấp ---------- */
+.evidence {
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+  min-height: 7rem;
+  padding: 0.9rem;
+  background: var(--parchment);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--terracotta);
+  border-radius: var(--radius-small);
+}
+
+.evidence__title {
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+.evidence__content {
+  font-weight: 500;
+  animation: screen-in 0.3s ease both;
+}
+
+.evidence-list {
+  margin-top: 0.75rem;
+}

@@ -4,6 +4,8 @@ Nguồn: `Ý tưởng web trò chơi(1).docx` và các quyết định chính th
 
 Cập nhật lần 3: đã áp dụng phần G (C1-C11 được người dùng xác nhận).
 
+Cập nhật lần 4: Chặng 1-4 đã được triển khai. Hàm chấm điểm thuần nằm ở `src/game/scoring/` (`stage1.ts` ... `stage4.ts`, `total.ts`, `points.ts`), mỗi hàm có unit test riêng. Điểm lưu theo nửa điểm; các hàm `stageNTier` trả về `null` cho điểm nằm ngoài các mốc của tài liệu (Chặng 1: 15, 19; Chặng 2: 15, 29) thay vì tự suy diễn thông báo; các điểm này không thể đạt được với luật chấm hiện tại.
+
 ## Tổng quan
 
 | Chặng | Tên | Điểm tối đa | Mảnh mật mã |
@@ -55,7 +57,7 @@ Thông báo và phần thưởng (điểm tổng kết của chặng):
 | 8-14 | Chúc mừng nhà thám hiểm kiên trì đã hoàn thành thử thách! | DI |
 | Dưới 8 | Rất tiếc bạn không nhận được mật mã trong chặng này. Hãy cố gắng hơn ở chặng tiếp theo! | không |
 
-Tổng điểm khả dụng (từ hai giá trị thuộc {0, 4, 6, 8, 10}): 0, 4, 6, 8, 10, 12, 14, 16, 18, 20. Mọi giá trị này đều thuộc đúng một mốc; các giá trị 15, 17, 19 không thể xảy ra nên không cần thông báo riêng.
+Tổng điểm khả dụng (từ hai giá trị thuộc {0, 4, 6, 8, 10}): 0, 4, 6, 8, 10, 12, 14, 16, 18, 20. Mọi giá trị này đều thuộc đúng một mốc. Các mốc của tài liệu để trống ở 15 và 19 (và mọi số lẻ/ngoài 0-20); 17 nằm trong khoảng 16-18. Trong code, `stage1Tier` trả về `null` cho các điểm ngoài mốc, không tự gán thông báo; các điểm này không thể đạt được.
 
 Mảnh "DI" chỉ nhận khi tổng Chặng 1 từ 8 điểm trở lên. Không có trường hợp "đúng khi mở 0 ô" vì phải mở ít nhất 1 ô mới được hoàn thành (B4).
 

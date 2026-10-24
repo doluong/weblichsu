@@ -58,5 +58,9 @@ export const UI_TEXT = {
   stage3PlaceHere: 'Đặt vào tủ này',
   stage3ReturnArtifact: 'Lấy hiện vật đã chọn ra khỏi tủ',
   stage3EmptyCabinet: 'Tủ trống',
+  // Chặng 4: gợi ý và nút mở thẻ là đề xuất (K1)
+  stage4Hint: 'Hãy chọn một thẻ nhân vật và một phương án hành động trước khi hoàn thành. Mở thẻ hồ sơ để xem chứng cứ.',
+  stage4Locked: 'Chặng 4 đã hoàn thành, lựa chọn của bạn đã được khóa.',
+  stage4OpenCard: 'Mở thẻ',
   stage3PoolEmpty: 'Đã đặt hết hiện vật',
 } as const

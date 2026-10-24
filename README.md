@@ -2,7 +2,7 @@
 
 Website trò chơi giáo dục bằng tiếng Việt gồm 5 chặng (tổng tối đa 100 điểm), xây dựng bằng React + TypeScript + Vite và triển khai miễn phí trên GitHub Pages.
 
-Trạng thái hiện tại: **Bước 2 - khung giao diện**. Đã có màn hình giới thiệu, biểu mẫu thông tin học sinh, thanh tiến trình 5 chặng, bảng mảnh mật mã và khung riêng cho từng chặng. Luật chơi và tính điểm của các chặng chưa được triển khai.
+Trạng thái hiện tại: **Chặng 1-4 đã chơi được** (tương tác, chấm điểm, thông báo, mảnh mật mã, khóa câu trả lời sau khi hoàn thành). **Chặng 5** (mật mã, tạo và xuất thẻ) vẫn là khung giao diện, chưa tính điểm. Hàm chấm điểm nằm ở `src/game/scoring/` và có unit test riêng.
 
 Tài liệu dự án nằm trong thư mục [`docs/`](docs):
 - [PROJECT_PLAN.md](docs/PROJECT_PLAN.md): kế hoạch, kiến trúc, lộ trình.
@@ -23,7 +23,7 @@ npm run dev
 
 Mở địa chỉ hiển thị trong terminal, dạng `http://localhost:5173/weblichsu/`. Dự án dùng `base: '/weblichsu/'` nên đường dẫn luôn có phần `/weblichsu/`.
 
-Ở chế độ `npm run dev` có thêm bảng "Xem khung (chỉ chế độ phát triển)" ở góc dưới để chuyển nhanh giữa các chặng và các chú thích tên file ảnh giữ chỗ. Các thành phần này không có trong bản build.
+Ở chế độ `npm run dev` có thêm bảng "Xem khung (chỉ chế độ phát triển)" ở góc dưới để chuyển nhanh giữa các chặng và các chú thích tên file ảnh giữ chỗ. Các thành phần này không có trong bản build. Bảng này chỉ đổi chặng đang xem, không cộng điểm và không cấp mảnh mật mã.
 
 Trên Windows PowerShell, nếu lệnh `npm` báo bị chặn chạy script, hãy dùng `npm.cmd` (ví dụ `npm.cmd run dev`).
 

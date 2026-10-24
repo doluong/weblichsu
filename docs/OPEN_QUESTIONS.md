@@ -274,3 +274,42 @@ Không còn mục nào bị chặn. Các mục ở H2 chỉ ảnh hưởng chữ
 | I3 | Lời dẫn Chặng 3 trong tài liệu có "hiện vật/ tư liệu" (thừa dấu cách) và không có dấu chấm cuối | Giữ nguyên văn như tài liệu vì không thuộc sổ sửa lỗi E3 | Chờ người dùng cho phép sửa nhẹ |
 | I4 | Khung Chặng 1 không đưa nội dung 4 lựa chọn và đáp án vào giao diện | Chỉ có khung tĩnh (ảnh, 4 ô che, vùng chọn đáp án); dữ liệu Chặng 1 sẽ làm ở bước chấm điểm Chặng 1 | Theo kế hoạch |
 | I5 | Bản build và test: Vitest dùng `BASE_URL` là `/`, không phải `/weblichsu/` | Test chỉ kiểm tra URL được dựng từ `BASE_URL`; đường dẫn `/weblichsu/` kiểm tra trên bản build (`dist/index.html`) | Đã xử lý |
+
+## J. Xác nhận của người dùng cho phát hiện sau bước 2
+I1: Lời dẫn Chặng 5 giữ nguyên toàn văn trong tài liệu nguồn.
+I2: Đồng ý
+I3: Lời dẫn Chặng 3 trong tài liệu có "hiện vật/ tư liệu" (thừa dấu cách) và không có dấu chấm cuối | Sửa dấu cách thừa và thêm dấu chấm ở cuối câu.
+I4: Đồng ý
+I5: Đồng ý
+Kiểm thử bắt buộc
+Viết unit test cho các hàm tính điểm và kiểm tra ít nhất:
+•	Chặng 1: đúng ở mỗi mức mở ô, trả lời sai và bấm xác nhận nhiều lần.
+•	Chặng 2: 0, 1, 14, 15, 28 và 30 điểm đúng theo dữ liệu kiểm thử; các khoảng chưa được quy định phải được ghi nhận, không tự suy diễn thông báo.
+•	Chặng 3: từng phòng, điểm tối đa, điểm bằng 0 và tổng hợp điểm.
+•	Chặng 4: từng nhân vật, số thẻ chứng cứ đã mở và ba phương án bỏ phiếu.
+•	Tổng điểm không vượt 100 và Chặng 5 không cộng điểm.
+Sau khi hoàn tất, chạy test, kiểm tra TypeScript và build. Sửa lỗi thực tế trước khi báo cáo. Liệt kê những quy tắc chưa rõ cần tôi xác nhận.
+
+## K. Áp dụng phần J và quy tắc chưa rõ khi triển khai Chặng 1-4
+
+### K0. Đã áp dụng từ phần J
+- I1: lời dẫn Chặng 5 giữ toàn văn, gồm câu "... chính thức ghi danh vào Bảng Vàng Hội đồng Di sản!". Lưu ý: câu này vẫn mâu thuẫn với B28 (không có bảng vàng); đã làm theo quyết định của người dùng, cần xem lại khi làm Chặng 5.
+- I2, I4, I5: đồng ý, giữ nguyên.
+- I3: lời dẫn Chặng 3 đã bỏ dấu cách thừa ("hiện vật/tư liệu") và thêm dấu chấm cuối câu.
+
+### K1. Quy tắc chưa rõ hoặc đề xuất cần người dùng xác nhận
+
+| # | Vấn đề | Cách xử lý hiện tại trong code | Trạng thái |
+|---|---|---|---|
+| K1.1 | Phòng 1: tài liệu mô tả mỗi hiện vật bằng chữ ("Tượng đá chạm khắc thần Shiva đang múa"...). Khi ảnh còn là ảnh giữ chỗ, các hiện vật không phân biệt được nếu thiếu chữ. Hiển thị chữ cạnh ảnh có thể làm lộ đáp án khi đã có ảnh thật | Hiển thị mô tả nguyên văn dưới mỗi ảnh hiện vật (cấu hình ở `ROOM1_ARTIFACTS[].description`) | Chờ xác nhận: giữ chữ, ẩn chữ (chỉ để cho trình đọc màn hình), hay chỉ ẩn sau khi có ảnh thật |
+| K1.2 | Chặng 2: bấm "Hoàn thành thử thách" khi chưa đặt thẻ nào vẫn được tính 0 điểm (B7), không có cảnh báo | Không có hộp xác nhận; gợi ý ngay dưới khung ghi rõ thẻ chưa đặt được 0 điểm | Chờ xác nhận có cần hộp cảnh báo trước khi nộp khi còn thẻ chưa đặt |
+| K1.3 | Chữ giao diện bổ sung ở Chặng 1-4 | Gom trong `src/content/uiText.ts`: gợi ý và thông báo khóa từng chặng, "Đặt thẻ vào đây", "Trả thẻ đã chọn về ngân hàng", "Hoàn thành phòng", "Đặt vào tủ này", "Tủ trống", "Mở thẻ", "Tiếp tục Chặng n", "Kết quả Chặng n", "Điểm số", "Tổng điểm hiện tại" và chữ chú thích ở các khu vực | Đề xuất, chờ duyệt |
+| K1.4 | Màn hình kết quả Chặng 1 hiển thị điểm từng ảnh (8/10, 0/10...). Điều này không tiết lộ đáp án đúng nhưng cho biết ảnh nào đúng/sai | Hiển thị theo E1.4 ("điểm tính riêng từng ảnh") | Chờ xác nhận chấp nhận |
+| K1.5 | Phòng 2: Tư liệu 2 trong tài liệu không có dấu chấm cuối câu ("...giá trị nhân văn Đông Nam Á") | Giữ nguyên văn như tài liệu (J.I3 chỉ cho phép sửa lời dẫn Chặng 3) | Chờ xác nhận có thêm dấu chấm |
+| K1.6 | Thứ tự lựa chọn Phòng 2 và Phòng 3, và thứ tự câu hỏi/công trình | Giữ đúng thứ tự tài liệu (không xáo trộn) | Chờ xác nhận |
+| K1.7 | Chặng 4: có được đổi nhân vật và phương án trước khi hoàn thành không; thẻ chứng cứ đã mở có đóng lại được không | Đổi được trước khi hoàn thành (tính lựa chọn cuối cùng); thẻ đã mở giữ nguyên mở và không cộng lặp | Chờ xác nhận |
+| K1.8 | Nhãn lựa chọn Chặng 1 "Chùa Bô-rô-bu-đua" (xem H2.1) | Dùng nhãn theo bản người dùng chỉnh trong SCORING_RULES.md | Chờ xác nhận cuối |
+| K1.9 | Khi xem lại một chặng đã hoàn thành (bấm trên thanh tiến trình) | Hiển thị lại bảng kết quả và khung câu hỏi ở trạng thái khóa, không hiện đáp án đúng | Chờ xác nhận |
+| K1.10 | Ngưỡng thông báo: các điểm 15 và 19 ở Chặng 1, 15 và 29 ở Chặng 2 không thuộc mốc nào của tài liệu | Hàm `stageNTier` trả về `null`, giao diện không hiển thị thông báo mới; các điểm này không thể đạt được | Đã ghi nhận, không cần xử lý |
+| K1.11 | Chặng 3: điểm Phòng 1 chỉ có thể là 0, 2,5, 5 hoặc 10 (hoán vị bốn hiện vật không thể đúng đúng 3 mục) | Chấm đúng theo luật 2,5 điểm mỗi hiện vật | Đã ghi nhận |
+| K1.12 | Chặng 5 chưa triển khai (mật mã, thẻ, xuất PNG); tổng điểm hiện hiển thị sau mỗi chặng | Chặng 5 vẫn là khung giao diện, không tính điểm | Bước tiếp theo |
