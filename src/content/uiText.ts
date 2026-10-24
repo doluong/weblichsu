@@ -48,4 +48,15 @@ export const UI_TEXT = {
   stage2EmptyZone: 'Chưa có thẻ',
   stage2BankEmpty: 'Đã đặt hết thẻ',
   stage2ReturnToBank: 'Trả thẻ đã chọn về ngân hàng',
+  // Chặng 3: nút và gợi ý là đề xuất (K1)
+  stage3RoomComplete: 'Hoàn thành phòng',
+  stage3Room1Hint: 'Chọn một hiện vật rồi chọn tủ trưng bày (hoặc kéo thả). Mỗi tủ chứa một hiện vật.',
+  stage3Room1Incomplete: 'Hãy đặt đủ 4 hiện vật vào các tủ để hoàn thành phòng.',
+  stage3Room2Incomplete: 'Hãy chọn từ cho cả 4 chỗ trống để hoàn thành phòng.',
+  stage3Room3Incomplete: 'Hãy trả lời cả 4 câu hỏi để hoàn thành phòng.',
+  stage3RoomLocked: 'Phòng này đã hoàn thành, các câu trả lời đã được khóa.',
+  stage3PlaceHere: 'Đặt vào tủ này',
+  stage3ReturnArtifact: 'Lấy hiện vật đã chọn ra khỏi tủ',
+  stage3EmptyCabinet: 'Tủ trống',
+  stage3PoolEmpty: 'Đã đặt hết hiện vật',
 } as const

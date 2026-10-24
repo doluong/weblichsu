@@ -4,16 +4,22 @@ interface ImageSlotProps {
   imageKey: ImageKey
   alt: string
   className?: string
+  // Dùng 'div' khi ảnh nằm trong nút (không hợp lệ đặt figure trong button).
+  as?: 'figure' | 'div'
 }
 
 // Vị trí ảnh dùng file giữ chỗ riêng. Chú thích tên file chỉ hiện ở chế độ phát triển.
-export function ImageSlot({ imageKey, alt, className = '' }: ImageSlotProps) {
+export function ImageSlot({ imageKey, alt, className = '', as = 'figure' }: ImageSlotProps) {
+  const Wrapper = as
+  const Caption = as === 'figure' ? 'figcaption' : 'span'
   return (
-    <figure className={`image-slot ${className}`.trim()} style={{ aspectRatio: imageRatio(imageKey) }}>
+    <Wrapper className={`image-slot ${className}`.trim()} style={{ aspectRatio: imageRatio(imageKey) }}>
       <img src={imageUrl(imageKey)} alt={alt} loading="lazy" decoding="async" />
       {import.meta.env.DEV && (
-        <figcaption className="image-slot__dev">Ảnh giữ chỗ: {imageFile(imageKey)}</figcaption>
+        <Caption className="image-slot__dev" aria-hidden="true">
+          Ảnh giữ chỗ: {imageFile(imageKey)}
+        </Caption>
       )}
-    </figure>
+    </Wrapper>
   )
 }

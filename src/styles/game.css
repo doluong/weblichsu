@@ -235,3 +235,127 @@ fieldset:disabled .option {
 .bank .btn {
   justify-self: start;
 }
+
+/* ---------- Chặng 3: phòng trưng bày ---------- */
+.room-nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.room-nav__btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: var(--tap);
+  padding: 0.5rem 0.8rem;
+  color: var(--text);
+  background: var(--paper);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-small);
+  font-weight: 600;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.room-nav__btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.room-nav__btn.is-current {
+  color: var(--ivory);
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.room-nav__status {
+  font-size: 0.72rem;
+  font-weight: 400;
+  opacity: 0.85;
+}
+
+.room-body {
+  display: grid;
+  gap: 1rem;
+}
+
+.cabinet__slot {
+  display: grid;
+}
+
+.artifact {
+  display: grid;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.4rem;
+  text-align: left;
+  color: var(--text);
+  background: #fff;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-small);
+  cursor: grab;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+  touch-action: manipulation;
+}
+
+.artifact:hover:not(:disabled) {
+  border-color: var(--gold);
+}
+
+.artifact.is-selected {
+  border-color: var(--ink);
+  background: #f3ecdc;
+  transform: translateY(-2px);
+}
+
+.artifact:disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.artifact__caption {
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.passage {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.passage__text {
+  line-height: 1.9;
+}
+
+.blank {
+  display: inline-block;
+  padding: 0 0.5rem;
+  border-bottom: 2px dashed var(--gold);
+  color: var(--gold-text);
+  font-weight: 600;
+}
+
+.blank.is-filled {
+  color: var(--jade);
+  border-bottom-style: solid;
+  border-bottom-color: var(--jade);
+}
+
+.passage__choices {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.building.card {
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+}
+
+@media (min-width: 640px) {
+  .passage__choices {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
