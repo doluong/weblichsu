@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { SUCCESS_BANNER } from '../../content/stage5'
 import { UI_TEXT } from '../../content/uiText'
 import { getTotal } from '../../game/selectors'
@@ -5,6 +6,7 @@ import { useGame } from '../../state/useGame'
 import { Button } from '../common/Button'
 import { AmbassadorCard } from './AmbassadorCard'
 import { ScaledCard } from './ScaledCard'
+import { ExportButton } from './ExportButton'
 import { ScoreSummary } from './ScoreSummary'
 
 interface AmbassadorResultProps {
@@ -15,6 +17,7 @@ interface AmbassadorResultProps {
 export function AmbassadorResult({ onRestart }: AmbassadorResultProps) {
   const { state, dispatch } = useGame()
   const { step, action, avatarUrl, issuedAt } = state.ambassador
+  const cardRef = useRef<HTMLDivElement>(null)
 
   return (
     <div className="ambassador-result">
@@ -28,6 +31,7 @@ export function AmbassadorResult({ onRestart }: AmbassadorResultProps) {
         </h2>
         <ScaledCard>
           <AmbassadorCard
+            cardRef={cardRef}
             student={state.student}
             total={getTotal(state)}
             action={action}
@@ -40,6 +44,7 @@ export function AmbassadorResult({ onRestart }: AmbassadorResultProps) {
             {UI_TEXT.restartButton}
           </Button>
           {step === 3 && <Button onClick={() => dispatch({ type: 'AMBASSADOR_TO_EXPORT' })}>{UI_TEXT.stage5ToExport}</Button>}
+          {step === 4 && <ExportButton cardRef={cardRef} studentName={state.student.name} />}
         </div>
       </section>
     </div>

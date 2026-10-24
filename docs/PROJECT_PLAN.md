@@ -101,7 +101,9 @@ Lệnh: `npm test`, `npx tsc --noEmit`, `npm run build` - chỉ báo kết quả
 
 Trạng thái: Bước 2 (khung giao diện) gộp một commit gồm S1, phần khung của S2/S8/S10/S11 (kiểu dữ liệu, reducer điều hướng, cấu hình ảnh, ảnh giữ chỗ, `IMAGE_ASSETS.md`, giao diện giới thiệu/biểu mẫu/5 khung chặng/hộp xác nhận) và các test tương ứng.
 
-Bước 3 (Chặng 1-4) đã làm, mỗi nhóm một commit: hàm chấm điểm thuần S3-S7 (trừ `cipher.ts`, `wordCount.ts` của Chặng 5); `shuffle.ts` (S7a); nội dung nguyên văn S9 cho Chặng 1-4; reducer và selectors S8; giao diện và test hành vi S12-S15. Còn lại: Chặng 5 (S16-S17: `cipher.ts`, `wordCount.ts`, biểu mẫu, thẻ, xuất PNG), test tĩnh mở rộng (S18), workflow GitHub Pages (S19), kiểm tra cuối (S20).
+Bước 3 (Chặng 1-4) đã làm, mỗi nhóm một commit: hàm chấm điểm thuần S3-S7; `shuffle.ts` (S7a); nội dung nguyên văn S9 cho Chặng 1-4; reducer và selectors S8; giao diện và test hành vi S12-S15.
+
+Bước 4 (Chặng 5) đã làm: áp dụng mục L (hộp cảnh báo Chặng 2, xáo lựa chọn Phòng 2-3, bỏ chữ mô tả hiện vật, dấu chấm Tư liệu 2); `cipher.ts`, `wordCount.ts` (S7); trạng thái và kiểm tra hợp lệ Chặng 5 (S16); biểu mẫu 4 bước, màn hình thất bại, thẻ Đại sứ và xuất PNG (S16-S17). Còn lại: test tĩnh mở rộng (S18), workflow GitHub Pages (S19), kiểm tra cuối (S20), PDF (tùy chọn, B30).
 
 | Bước | Nội dung | Tiêu chí hoàn thành | Lệnh kiểm tra |
 |---|---|---|---|

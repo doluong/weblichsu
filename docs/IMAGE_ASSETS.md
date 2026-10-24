@@ -37,7 +37,9 @@ Ghi chú:
 
 ## Ảnh học sinh tải lên (Chặng 5)
 
-Ảnh chân dung do học sinh chọn ở Chặng 5 chỉ được dùng trong trình duyệt của phiên hiện tại, không tải lên máy chủ và không được lưu. Chức năng này sẽ được làm ở bước sau.
+Ảnh chân dung do học sinh chọn ở Bước 1 Chặng 5 là tùy chọn: chỉ nhận JPG, PNG hoặc WebP nhỏ hơn 5 MB (giới hạn kỹ thuật do dự án đặt, xem OPEN_QUESTIONS mục M). Ảnh chỉ được dùng trong trình duyệt của phiên hiện tại (đường dẫn `blob:` tạm thời), không tải lên máy chủ và không được lưu; ảnh bị thu hồi khi học sinh đổi ảnh, xóa ảnh hoặc tái khởi động. Nếu không tải ảnh, thẻ dùng `portrait-default-placeholder.jpg`; ảnh được cắt vừa khung 3:4 (`object-fit: cover`), không bị méo.
+
+Chặng 3, Phòng 1: mô tả chữ của từng hiện vật chỉ còn là văn bản thay thế (`alt`) cho trình đọc màn hình, không hiển thị trên giao diện (OPEN_QUESTIONS L.K1.1). Khi chưa có ảnh thật, bốn ảnh hiện vật là bốn mảng màu và không thể phân biệt bằng mắt; cần thay ảnh thật để chơi được Phòng 1.
 
 ## Kiểm tra tự động
 

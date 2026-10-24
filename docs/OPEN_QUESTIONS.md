@@ -327,3 +327,34 @@ K1.9: Đồng ý.
 K1.10: Đồng ý.
 K1.11: Đồng ý.
 K1.12: Đồng ý.
+
+## M. Áp dụng phần L và triển khai Chặng 5
+
+### M0. Đã áp dụng từ phần L
+- K1.1: bỏ chữ mô tả hiện vật Phòng 1 trên giao diện; mô tả chỉ còn là văn bản thay thế (`alt`) cho trình đọc màn hình.
+- K1.2: hộp cảnh báo khi hoàn thành Chặng 2 còn thẻ chưa đặt ("Vẫn hoàn thành" / "Quay lại"). Các chặng/phòng khác không cho hoàn thành khi chưa đủ nên không cần hộp này. Chữ hộp cảnh báo là đề xuất theo K1.3.
+- K1.5: Tư liệu 2 (Phòng 2) đã có dấu chấm cuối câu.
+- K1.6: xáo trộn lựa chọn Phòng 2 và Phòng 3 (nhãn A-D gán theo vị trí hiển thị, chấm theo mã lựa chọn). Hiểu là xáo thứ tự lựa chọn, không xáo thứ tự các chỗ trống, câu hỏi hay công trình.
+- K1.3, K1.4, K1.7-K1.12: đồng ý, giữ nguyên.
+
+### M1. Chặng 5 đã triển khai theo các quyết định đã xác nhận
+B21-B31, C1, C4, C5, C6, J.I1 (lời dẫn Chặng 5 giữ toàn văn, gồm câu "Bảng Vàng"). Không còn câu hỏi chặn việc triển khai Chặng 5.
+
+### M2. Quy tắc bổ sung do tôi đặt khi triển khai (đề xuất, chưa được xác nhận)
+
+| # | Nội dung | Cách xử lý hiện tại | Trạng thái |
+|---|---|---|---|
+| M2.1 | Ảnh chân dung: loại tệp và dung lượng | Chỉ nhận JPG, PNG, WebP nhỏ hơn 5 MB; sai thì báo "Vui lòng chọn tệp ảnh (JPG, PNG hoặc WebP) nhỏ hơn 5 MB." | Đề xuất |
+| M2.2 | Sau khi kiểm tra mật mã (đúng hoặc sai), không cho sửa thông tin, mật mã, hành động hay ảnh nữa (nhất quán với B25: một lần, không nhập lại) | Dữ liệu bị khóa; muốn làm lại phải tái khởi động | Đề xuất |
+| M2.3 | Bước 3 (xem trước) và Bước 4 (xuất thẻ) cùng hiển thị thẻ | Bước 3: điểm các chặng, lời chúc, thẻ, nút "Tiếp tục để xuất thẻ"; Bước 4: thẻ, nút "Xuất thẻ", "Tái khởi động hành trình" | Đề xuất |
+| M2.4 | Tên file xuất: không dấu | `the-dai-su-di-san-so-<ten-hoc-sinh>.png` | Đề xuất |
+| M2.5 | Chữ giao diện Chặng 5 (nhãn nút, gợi ý, ghi chú ảnh, "Đã nhập n từ (cần từ 30 đến 50 từ).", thông báo lỗi xuất thẻ) | Gom trong `src/content/uiText.ts` | Đề xuất (K1.3 đã đồng ý nguyên tắc) |
+| M2.6 | Mật mã hiển thị trên thẻ | Luôn in mật mã chuẩn `DI SẢN KẾT NỐI TƯƠNG LAI` (người chơi có thể gõ chữ thường) | Đề xuất |
+| M2.7 | Lời dẫn Chặng 5 có câu "ghi danh vào Bảng Vàng Hội đồng Di sản" trong khi B28 không có bảng vàng | Giữ nguyên theo J.I1 | Đã quyết định, ghi nhận mâu thuẫn |
+| M2.8 | Xuất PDF | Chưa làm (B30) | Chờ PNG ổn định rồi quyết định |
+
+### M3. Kiểm thử thực tế đã chạy khi làm Chặng 5
+- Unit test: mật mã (hoa/thường, khoảng trắng, NFC, dấu), đếm từ (0, 29, 30, 50, 51...), kiểm tra hợp lệ theo thứ tự C5, ngày cấp dd/mm/yyyy, lời khen 100/100 và lời động viên, lời nhắn sai mật mã, tên file, ảnh chân dung.
+- Test giao diện: thiếu thông tin, sửa thông tin, tải ảnh hợp lệ/không hợp lệ và thu hồi URL, đúng/sai mật mã, tái khởi động, ngày cấp, xuất thẻ (có giả lập thư viện).
+- Chạy thật trên trình duyệt: xuất PNG 1640 px chiều rộng, chữ tiếng Việt đúng font, không cắt chữ với nội dung 50 từ, ảnh chân dung tải lên hiển thị đúng vị trí và không méo; kích thước ảnh xuất giống nhau ở khung nhìn 1280 px và 375 px. Phát hiện và sửa lỗi: tùy chọn `cacheBust` làm hỏng ảnh `blob:` của người dùng khi xuất.
+- Chưa thử: xuất trên thiết bị di động thật, trình duyệt Safari, in thẻ.

@@ -80,7 +80,20 @@
 
 .ambassador-result {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1rem;
+}
+
+/* Cho phép thẻ rộng cố định được thu nhỏ trong ô lưới thay vì làm tràn trang trên màn hình hẹp */
+.stage,
+.stage__body {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.stage__body > *,
+.ambassador-result > *,
+.ambassador-result .card {
+  min-width: 0;
 }
 
 .notice--success {

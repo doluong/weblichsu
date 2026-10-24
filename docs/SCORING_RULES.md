@@ -135,7 +135,8 @@ Quyết định (D: B17-B20):
 - Sai mật mã (B25): không tạo thẻ, hiển thị đúng thông báo thất bại theo tài liệu cùng tổng điểm các chặng, chỉ có nút "Tái khởi động hành trình"; không cho nhập lại trong lượt chơi đó.
 - Đúng mật mã: hiển thị điểm các chặng, "Chúc mừng em đã hoàn thành thử thách đại sứ di sản số", thẻ, nút "Xuất thẻ" (PNG trước; PDF chỉ sau khi PNG ổn định, B30) và "Tái khởi động hành trình".
 - Ngày cấp (B27): ngày tạo thẻ theo thiết bị, định dạng ngày/tháng/năm.
-- Không bảng vàng, không nộp bài, không lưu kết quả (B28).
+- Không bảng vàng, không nộp bài, không lưu kết quả (B28). Lời dẫn Chặng 5 giữ toàn văn tài liệu theo J.I1 dù có nhắc "Bảng Vàng".
+- Đã triển khai (xem OPEN_QUESTIONS mục M): thứ tự kiểm tra C5; mật mã chỉ kiểm tra một lần, sau đó dữ liệu bị khóa; ảnh chân dung chỉ dùng trong bộ nhớ trình duyệt; xuất PNG 1640 px chiều rộng bằng `html-to-image`.
 
 ## Tổng điểm, mảnh mật mã và điều kiện tạo thẻ
 

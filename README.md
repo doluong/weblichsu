@@ -2,7 +2,9 @@
 
 Website trò chơi giáo dục bằng tiếng Việt gồm 5 chặng (tổng tối đa 100 điểm), xây dựng bằng React + TypeScript + Vite và triển khai miễn phí trên GitHub Pages.
 
-Trạng thái hiện tại: **Chặng 1-4 đã chơi được** (tương tác, chấm điểm, thông báo, mảnh mật mã, khóa câu trả lời sau khi hoàn thành). **Chặng 5** (mật mã, tạo và xuất thẻ) vẫn là khung giao diện, chưa tính điểm. Hàm chấm điểm nằm ở `src/game/scoring/` và có unit test riêng.
+Trạng thái hiện tại: **Cả 5 chặng đã chơi được.** Chặng 1-4 (tương tác, chấm điểm, thông báo, mảnh mật mã, khóa câu trả lời) và Chặng 5 (nhập thông tin, mật mã, hành động bảo tồn 30-50 từ, tạo thẻ Đại sứ, xuất thẻ PNG). Hàm chấm điểm nằm ở `src/game/scoring/`, kiểm tra mật mã và đếm từ ở `src/game/cipher.ts`, `src/game/wordCount.ts`; mỗi phần có unit test riêng.
+
+Xuất thẻ: dùng thư viện `html-to-image` (MIT) để chụp phần tử thẻ thành PNG ngay trên trình duyệt, không gửi dữ liệu đi đâu. Thẻ có chiều rộng thiết kế cố định 820 px (xuất ảnh 1640 px chiều rộng, chiều cao tự giãn theo nội dung) nên ảnh giống nhau trên mọi kích thước màn hình; xem trước được thu nhỏ bằng CSS trên màn hình hẹp. PDF chưa làm (B30: chỉ làm sau khi PNG ổn định và được kiểm thử).
 
 Tài liệu dự án nằm trong thư mục [`docs/`](docs):
 - [PROJECT_PLAN.md](docs/PROJECT_PLAN.md): kế hoạch, kiến trúc, lộ trình.
