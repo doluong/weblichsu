@@ -16,6 +16,8 @@ import type { HalfPoints } from './scoring/points'
 import { defaultShuffles, type Shuffles } from './shuffle'
 import type { GameAction, GameState, RoomId, StageStatus } from './types'
 import { isStudentInfoValid, normalizeStudentInfo } from './validation'
+import { hasErrors, validateAmbassador } from './ambassador'
+import { isCorrectCode } from './cipher'
 
 const EMPTY_STUDENT = { name: '', className: '', school: '' }
 
@@ -61,6 +63,7 @@ export function createInitialState(shuffles: Shuffles = defaultShuffles()): Game
       room3Order: copyOrders(shuffles.room3Options),
     },
     stage4: { roleId: null, opened: [], voteId: null },
+    ambassador: { step: 1, code: '', action: '', avatarUrl: null, outcome: null, issuedAt: null },
     scores: { 1: null, 2: null, 3: null, 4: null },
     fragments: { 1: false, 2: false, 3: false, 4: false },
   }
@@ -105,6 +108,11 @@ export function placeArtifact(
   if (occupant) next[occupant] = current
   next[itemId] = cabinetId
   return next
+}
+
+// Chặng 5 chỉ chỉnh sửa được khi đang chơi và chưa kiểm tra mật mã.
+function isAmbassadorEditable(state: GameState): boolean {
+  return state.screen === 'stage' && state.stageStatus[5] === 'in_progress' && state.ambassador.outcome === null
 }
 
 function isRoomComplete(state: GameState, room: RoomId): boolean {
@@ -258,6 +266,54 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       if (!isOpen(state, 4) || !canCompleteStage4(roleId, voteId)) return state
       const { total } = scoreStage4({ roleId, openedEvidenceIds: opened, voteId })
       return completeStage(state, 4, total, true)
+    }
+
+    // ---------- Chặng 5 (không tính điểm) ----------
+    case 'UPDATE_STUDENT': {
+      if (!isAmbassadorEditable(state) || !isStudentInfoValid(action.student)) return state
+      return { ...state, student: normalizeStudentInfo(action.student) }
+    }
+
+    case 'SET_CODE':
+      return isAmbassadorEditable(state)
+        ? { ...state, ambassador: { ...state.ambassador, code: action.code } }
+        : state
+
+    case 'SET_ACTION':
+      return isAmbassadorEditable(state)
+        ? { ...state, ambassador: { ...state.ambassador, action: action.action } }
+        : state
+
+    case 'SET_AVATAR':
+      return isAmbassadorEditable(state)
+        ? { ...state, ambassador: { ...state.ambassador, avatarUrl: action.avatarUrl } }
+        : state
+
+    case 'AMBASSADOR_STEP': {
+      if (!isAmbassadorEditable(state)) return state
+      // Sang Bước 2 chỉ khi thông tin học sinh hợp lệ.
+      if (action.step === 2 && !isStudentInfoValid(state.student)) return state
+      return { ...state, ambassador: { ...state.ambassador, step: action.step } }
+    }
+
+    case 'SUBMIT_AMBASSADOR': {
+      const amb = state.ambassador
+      const allDone = ([1, 2, 3, 4] as const).every((stage) => state.stageStatus[stage] === 'completed')
+      if (!isAmbassadorEditable(state) || amb.step !== 2 || !allDone) return state
+      if (hasErrors(validateAmbassador(state.student, amb.code, amb.action))) return state
+      // Mật mã sai: không tạo thẻ, không cho nhập lại trong lượt chơi này (B25).
+      if (!isCorrectCode(amb.code)) return { ...state, ambassador: { ...amb, outcome: 'failed' } }
+      return {
+        ...state,
+        stageStatus: { ...state.stageStatus, 5: 'completed' },
+        ambassador: { ...amb, outcome: 'success', step: 3, issuedAt: action.issuedAt },
+      }
+    }
+
+    case 'AMBASSADOR_TO_EXPORT': {
+      const amb = state.ambassador
+      if (amb.outcome !== 'success' || amb.step !== 3) return state
+      return { ...state, ambassador: { ...amb, step: 4 } }
     }
 
     default:

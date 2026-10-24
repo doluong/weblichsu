@@ -48,6 +48,21 @@ export interface Stage4State {
   voteId: string | null
 }
 
+export type AmbassadorStep = 1 | 2 | 3 | 4
+export type AmbassadorOutcome = 'success' | 'failed'
+
+// Chặng 5 không tính điểm. Mọi dữ liệu chỉ nằm trong bộ nhớ; ảnh chân dung là object URL của phiên hiện tại.
+export interface AmbassadorState {
+  step: AmbassadorStep
+  code: string
+  action: string
+  avatarUrl: string | null
+  // null: chưa kiểm tra mật mã; 'failed': sai mật mã, không tạo thẻ (chỉ có thể tái khởi động).
+  outcome: AmbassadorOutcome | null
+  // Ngày cấp (dd/mm/yyyy) tại thời điểm tạo thẻ.
+  issuedAt: string | null
+}
+
 export interface GameState {
   screen: Screen
   student: StudentInfo
@@ -57,6 +72,7 @@ export interface GameState {
   stage2: Stage2State
   stage3: Stage3State
   stage4: Stage4State
+  ambassador: AmbassadorState
   // Điểm từng chặng (nửa điểm); null khi chặng chưa hoàn thành. Chặng 5 không có điểm.
   scores: Record<ScoredStageId, HalfPoints | null>
   // Mảnh mật mã đã nhận theo chặng; chặng chưa nhận là ô trống.
@@ -83,3 +99,10 @@ export type GameAction =
   | { type: 'OPEN_EVIDENCE'; evidenceId: string }
   | { type: 'SELECT_VOTE'; voteId: string }
   | { type: 'SUBMIT_STAGE4' }
+  | { type: 'UPDATE_STUDENT'; student: StudentInfo }
+  | { type: 'SET_CODE'; code: string }
+  | { type: 'SET_ACTION'; action: string }
+  | { type: 'SET_AVATAR'; avatarUrl: string | null }
+  | { type: 'AMBASSADOR_STEP'; step: 1 | 2 }
+  | { type: 'SUBMIT_AMBASSADOR'; issuedAt: string }
+  | { type: 'AMBASSADOR_TO_EXPORT' }
