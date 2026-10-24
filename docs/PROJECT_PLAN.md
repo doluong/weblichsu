@@ -13,8 +13,8 @@ Website trò chơi giáo dục tiếng Việt, 5 chặng, tổng tối đa 100 �
 
 1. Giới thiệu: tiêu đề, lời dẫn nguyên văn, nút bắt đầu.
 2. Thông tin học sinh: họ tên, lớp, trường (bắt buộc, kiểm tra trước khi bắt đầu).
-3. Chặng 1-4: mỗi chặng gồm màn chơi, nút hoàn thành (disabled khi chưa đủ điều kiện), màn kết quả (điểm chặng, thông báo, mảnh mật mã, tổng điểm tạm). Chỉ mở chặng kế khi chặng hiện tại đã hoàn thành.
-4. Chặng 5: nhập mật mã và hành động bảo tồn; đúng -> điểm các chặng + lời chúc + thẻ + nút "Xuất thẻ" và "Tái khởi động hành trình"; sai -> tổng điểm + lời động viên + nút "Tái khởi động hành trình".
+3. Chặng 1: hai ảnh bí ẩn hiển thị cùng lúc; mở ô, chọn đáp án cho cả hai ảnh rồi bấm một nút "Hoàn thành" (chỉ sáng khi mỗi ảnh đã mở ít nhất 1 ô và đã chọn đáp án). Chặng 2-4 mỗi chặng gồm màn chơi, nút hoàn thành (disabled khi chưa đủ điều kiện) và màn kết quả (điểm chặng, thông báo, mảnh mật mã, tổng điểm tạm). Chặng 3 gồm 3 phòng theo thứ tự, mỗi phòng phải trả lời đủ mới hoàn thành, điểm phòng chỉ hiện ở tổng kết chặng. Chỉ mở chặng kế khi chặng hiện tại đã hoàn thành; chặng đã hoàn thành bị khóa.
+4. Chặng 5 (4 bước): (1) thông tin học sinh, cho sửa họ tên/lớp/trường, ảnh chân dung tùy chọn; (2) mật mã và đóng góp bảo tồn 30-50 từ; (3) xem trước: điểm các chặng, lời chúc, thẻ; (4) xuất PNG và tái khởi động. Mật mã sai (sau khi các trường hợp lệ) -> màn hình thất bại một lần, chỉ có nút "Tái khởi động hành trình".
 5. Thanh tiến trình 5 chặng và bảng mảnh mật mã đã nhận luôn hiển thị; "Tái khởi động" luôn hỏi xác nhận.
 
 ## 3. Cấu trúc thư mục
@@ -43,7 +43,8 @@ Nguyên tắc: dữ liệu câu hỏi/đáp án, hàm chấm điểm (thuần, k
 - `useReducer` + React Context, không dùng thư viện lưu trữ, không persist.
 - `GameState`: `screen`, `student {name, className, school}`, `stages[1..5].status` (`locked | in_progress | completed`), `answers` theo chặng, `scores {s1..s4}`, `fragments`, `ambassador {code, action, avatarUrl}`, `cardIssuedAt`.
 - Điểm do hàm thuần tính từ `answers` khi hoàn thành chặng, lưu một lần; action hoàn thành bị bỏ qua nếu chặng đã `completed` (chống cộng hai lần, khóa đáp án).
-- Tổng điểm = tổng `s1..s4`, chặn trên 100; Chặng 5 không có điểm.
+- Điểm lưu theo đơn vị nửa điểm bằng số nguyên (2,5 điểm = 5); hàm định dạng hiển thị dấu phẩy kiểu Việt. Tổng điểm = tổng `s1..s4`, chặn trên 100; Chặng 5 không có điểm.
+- Dữ liệu Chặng 1 có cấu trúc `{ imageId, options: [{id, label}], correctOptionId: string | null }`. Hiện `correctOptionId` để trống cho đến khi C3 được xác nhận; hàm kiểm tra `isStage1DataReady()` báo thiếu dữ liệu; dữ liệu giả chỉ nằm trong test, không nằm trong `src/content`.
 - `RESET` (sau xác nhận) trả về trạng thái ban đầu và thu hồi `URL.createObjectURL` của ảnh chân dung. Ảnh chân dung chỉ ở trình duyệt, không tải lên đâu.
 
 ## 5. Danh sách ảnh cần có
@@ -85,14 +86,40 @@ Lệnh: `npm test`, `npx tsc --noEmit`, `npm run build` - chỉ báo kết quả
 - Không dùng router (điều hướng bằng state), tránh lỗi 404 trên Pages.
 - Mọi đường dẫn ảnh qua `assets.ts` + `import.meta.env.BASE_URL`; font cài qua `@fontsource` (đóng gói cùng bản build, hỗ trợ tiếng Việt), không dùng CDN.
 - Xuất thẻ: `html-to-image` (miễn phí, tương thích Vite) tạo PNG ở phía trình duyệt; PDF (jsPDF) chỉ thêm nếu ổn định.
-- `.github/workflows/deploy.yml`: build bằng `npm ci && npm run build`, `actions/upload-pages-artifact` + `actions/deploy-pages`; Pages source là GitHub Actions. Cần thêm `git remote` và commit đầu tiên.
+- `.github/workflows/deploy.yml`: build bằng `npm ci && npm run build`, `actions/upload-pages-artifact` + `actions/deploy-pages`; Pages source là GitHub Actions. Remote chưa có: người dùng tự thêm `git remote` và push.
 
-## 8. Thứ tự triển khai
+## 8. Quy trình làm việc và commit
 
-1. (Giai đoạn này) Ba tài liệu trong `docs/`.
-2. Khởi tạo Vite + React + TS (không ghi đè file sẵn có), bộ khung màn hình, placeholder, `IMAGE_ASSETS.md`.
-3. Logic và giao diện Chặng 1-4 cùng unit test.
-4. Chặng 5: mật mã, đếm từ, thẻ, xuất PNG, khởi động lại.
-5. Kiểm tra cuối (build, test, quét lưu trữ/emoji), cấu hình triển khai GitHub Pages.
+- Mỗi bước dưới đây là một commit riêng, thông điệp mô tả rõ nội dung, có trailer `Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>`.
+- Chỉ commit khi lệnh kiểm tra của bước thành công và không còn lỗi chưa xử lý. Nếu thất bại: sửa rồi chạy lại, không commit; không gộp nhiều bước vào một commit; không push (remote chưa có, người dùng tự push khi muốn).
+- Git hiện đã sẵn sàng: nhánh `master`, đã có commit `init`, đã cấu hình user.name/user.email. Nếu `git commit` lỗi (hook, khóa file, thiếu danh tính) thì báo rõ nguyên nhân và cách xử lý, không giả vờ đã commit.
+- Node, npm, git chưa nằm trong PATH của shell. Mỗi lệnh chạy sau khi đặt: `$env:Path = 'C:\Program Files\nodejs;C:\Program Files\Git\cmd;' + $env:Path`.
+- Lệnh kiểm tra chung (sau S1): `npm run typecheck` (`tsc -b`), `npm test` (`vitest run`), `npm run build` (`vite build`).
 
-Điều kiện tiên quyết: người dùng cung cấp đáp án Chặng 1 (B1) và duyệt các điểm trong `OPEN_QUESTIONS.md` trước khi triển khai Chặng 1-5.
+## 9. Lộ trình từng bước nhỏ
+
+| Bước | Nội dung | Tiêu chí hoàn thành | Lệnh kiểm tra |
+|---|---|---|---|
+| S0 | Cập nhật 3 tài liệu theo phần D | `PROJECT_PLAN.md`, `SCORING_RULES.md`, `OPEN_QUESTIONS.md` (E, F) cập nhật; B1/C-mục ghi rõ chờ xác nhận; không emoji | Quét emoji bằng `Select-String` kết quả 0; `git diff --stat` |
+| S1 | Khởi tạo Vite + React + TS vào thư mục tạm rồi chép sang (không ghi đè `docs/`, `.docx`); thêm `.gitignore` (node_modules, dist); `base: '/weblichsu/'`; Vitest + Testing Library | Có `package.json`, `src/`, test mẫu xanh; `dist/index.html` trỏ asset dưới `/weblichsu/` | `npm run typecheck`, `npm test`, `npm run build`, kiểm tra `dist/index.html` bằng `Select-String '/weblichsu/'` |
+| S2 | Kiểu dữ liệu, `config/scoring.ts`, định dạng điểm nửa điểm/dấu phẩy | Test định dạng (5 đơn vị nửa điểm -> "2,5"; 75 -> "37,5"; 80 -> "40") xanh | `npm test` |
+| S3 | Chấm Chặng 1 (dùng fixture chỉ trong test) | Test: đúng ở 1/2/3/4 ô, sai, 0 ô bị từ chối, hai ảnh, khóa sau hoàn thành, các mốc 20/16-18/8-14/dưới 8 | `npm test` |
+| S4 | Chấm Chặng 2 | Test 0, 2, 14, 16, 28, 30; mảnh SẢN từ 16; thẻ chưa đặt = 0 | `npm test` |
+| S5 | Chấm Chặng 3 | Test từng phòng, 0, 40, 15, 37,5; mảnh KẾT NỐI từ 15 | `npm test` |
+| S6 | Chấm Chặng 4 | Test 4 nhân vật, 0-3 thẻ, A/B/C, min 4, max 10, không cộng lặp | `npm test` |
+| S7 | Tổng điểm, mảnh mật mã, `cipher.ts`, `wordCount.ts`, điều kiện tạo thẻ | Test tổng không vượt 100, Chặng 5 cộng 0, so khớp mật mã (NFC, hoa/thường, khoảng trắng, dấu), đếm 29/30/50/51 từ | `npm test` |
+| S8 | Reducer + Context | Test chống cộng điểm hai lần, khóa chặng, gating, RESET, bấm hoàn thành liên tục | `npm test`, `npm run typecheck` |
+| S9 | Nội dung nguyên văn từ docx cho Chặng 2-5 và phần cố định Chặng 1, áp dụng sổ sửa chính tả (E3) | Test đếm: 15 thẻ, 4 từ Phòng 2, 4 câu Phòng 3, 3 phương án; không còn "Hin đu", "ĐẠO SỨ"; Chặng 1 `correctOptionId` rỗng | `npm test` |
+| S10 | `config/assets.ts`, 11 file placeholder trung tính khác tên (và nền tùy chọn), `docs/IMAGE_ASSETS.md` | Test tên file duy nhất, file tồn tại, đường dẫn dùng `BASE_URL` | `npm test`, `npm run build` |
+| S11 | Khung giao diện: giới thiệu, form thông tin (B26, B31), tiến trình, bảng mảnh mật mã, hộp xác nhận tái khởi động | Test hành vi: nút disabled khi thiếu thông tin, thông báo đúng tại trường, xác nhận trước khi reset | `npm test`, `npm run build` |
+| S12 | UI Chặng 1 (chỉ sau khi C2, C3 được xác nhận) | Hai ảnh cùng lúc, Hoàn thành chỉ sáng khi đủ điều kiện, khóa sau hoàn thành | `npm test`, `npm run build` |
+| S13 | UI Chặng 2 (kéo thả và chọn thẻ rồi chọn giai đoạn) | Test chọn thẻ, đặt thẻ, hoàn thành khi chưa đặt hết, khóa | `npm test`, `npm run build` |
+| S14 | UI Chặng 3 (3 phòng tuần tự; Phòng 1 sau khi C11 được xác nhận) | Test thứ tự phòng, bắt buộc đủ mục, không hiện điểm phòng khi chơi, tổng kết kèm điểm từng phòng | `npm test`, `npm run build` |
+| S15 | UI Chặng 4 | Test chọn nhân vật + phương án mới hoàn tất, thẻ chứng cứ tùy chọn, ghi chú tình huống giả định | `npm test`, `npm run build` |
+| S16 | Chặng 5: form, kiểm tra hợp lệ (B21-B26), màn hình thất bại (sau khi C1, C4, C5 được xác nhận) | Test thông báo đúng 4 câu, không xóa dữ liệu khi lỗi, sai mật mã chỉ có nút tái khởi động | `npm test`, `npm run build` |
+| S17 | Thẻ Đại sứ + xuất PNG bằng `html-to-image` | Test ngày dd/mm/yyyy, lời khen 100 và dưới 100, 50 từ không bị cắt; thử xuất trên trình duyệt thật | `npm test`, `npm run build` và thử thủ công |
+| S18 | Test tĩnh | Không có `localStorage`, `sessionStorage`, `document.cookie`, `indexedDB`, `fetch`, `XMLHttpRequest`, QR, emoji trong `src` | `npm test` |
+| S19 | Workflow GitHub Pages | `.github/workflows/deploy.yml` hợp lệ; `vite preview` phục vụ đúng ở đường dẫn con | `npm run build`, `curl http://localhost:4173/weblichsu/` |
+| S20 | Kiểm tra cuối | Tất cả lệnh chung xanh, quét tĩnh sạch; chỉ báo kết quả đã thực sự chạy | `npm run typecheck`, `npm test`, `npm run build` |
+
+Các bước không bị chặn bởi xác nhận: S1-S11, S13, S15, S17-S20 (phần không liên quan Chặng 1, Phòng 1, Chặng 5). Xem phần F của `OPEN_QUESTIONS.md` về các điều kiện tiên quyết còn lại.
