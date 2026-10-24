@@ -8,11 +8,9 @@ export const INTRO_TEXT =
 export const STAGE_INTROS: Record<number, string> = {
   1: 'Em hãy lật mở các mảnh ghép để nhận diện di sản tương ứng. Mở càng ít ô và trả lời càng nhanh, điểm số thu về sẽ càng cao để mở khóa mật mã đầu tiên!',
   2: 'Em hãy kéo thả các thẻ Vương quốc, Sự kiện vào đúng vị trí trên Trục thời gian Đông Nam Á để mở khóa mảnh mật mã tiếp theo.',
-  3: 'Chào mừng các nhà thám hiểm đến với Bảo tàng Di sản Đông Nam Á! Em hãy lần lượt bước vào 3 Phòng trưng bày: phân biệt các hiện vật/ tư liệu, khôi phục văn bản và khám phá các điểm nóng kiến trúc để thu thập mảnh mật mã thứ ba',
+  3: 'Chào mừng các nhà thám hiểm đến với Bảo tàng Di sản Đông Nam Á! Em hãy lần lượt bước vào 3 Phòng trưng bày: phân biệt các hiện vật/tư liệu, khôi phục văn bản và khám phá các điểm nóng kiến trúc để thu thập mảnh mật mã thứ ba.',
   4: 'CẢNH BÁO KHẨN CẤP: Quần thể di sản cổ Thánh địa A-ru-na đang đứng trước nguy cơ sụp đổ nghiêm trọng do tác động của thiên tai và áp lực quá tải từ hàng triệu lượt khách du lịch mỗi năm. Hội đồng Di sản quyết định triệu tập một Phiên họp Khẩn cấp! Các em hãy đảm nhận các vai trò chuyên gia, nghiên cứu hồ sơ chứng cứ và tranh luận để đưa ra Quyết nghị cứu nguy cho di sản!',
-  // Câu cuối của tài liệu ("... chính thức ghi danh vào Bảng Vàng Hội đồng Di sản!") chưa hiển thị:
-  // B28 cấm bảng vàng, xem docs/OPEN_QUESTIONS.md mục I1.
-  5: 'Sứ mệnh khôi phục bản đồ văn minh đã đi đến chặng cuối cùng!',
+  5: 'Sứ mệnh khôi phục bản đồ văn minh đã đi đến chặng cuối cùng! Hãy kích hoạt Mật mã, khởi tạo chiếc Thẻ Đại Sứ Di Sản Số mang dấu ấn cá nhân và chính thức ghi danh vào Bảng Vàng Hội đồng Di sản!',
 }
 
 export const STAGE3_ROOMS = [
