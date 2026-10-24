@@ -16,7 +16,7 @@ interface AmbassadorResultProps {
 // Bước 3: xem trước (điểm các chặng, lời chúc, thẻ). Bước 4: xuất thẻ và tái khởi động.
 export function AmbassadorResult({ onRestart }: AmbassadorResultProps) {
   const { state, dispatch } = useGame()
-  const { step, action, avatarUrl, issuedAt } = state.ambassador
+  const { action, avatarUrl, issuedAt } = state.ambassador
   const cardRef = useRef<HTMLDivElement>(null)
 
   return (
@@ -25,10 +25,8 @@ export function AmbassadorResult({ onRestart }: AmbassadorResultProps) {
         {SUCCESS_BANNER}
       </p>
       <ScoreSummary />
-      <section className="card" aria-label={step === 3 ? UI_TEXT.stage5PreviewTitle : UI_TEXT.stage5ExportTitle}>
-        <h2 className="card__title card__title--small">
-          {step === 3 ? UI_TEXT.stage5PreviewTitle : UI_TEXT.stage5ExportTitle}
-        </h2>
+      <section className="card" aria-label={UI_TEXT.stage5PreviewTitle}>
+        <h2 className="card__title card__title--small">{UI_TEXT.stage5PreviewTitle}</h2>
         <ScaledCard>
           <AmbassadorCard
             cardRef={cardRef}
@@ -43,8 +41,11 @@ export function AmbassadorResult({ onRestart }: AmbassadorResultProps) {
           <Button variant="ghost" onClick={onRestart}>
             {UI_TEXT.restartButton}
           </Button>
-          {step === 3 && <Button onClick={() => dispatch({ type: 'AMBASSADOR_TO_EXPORT' })}>{UI_TEXT.stage5ToExport}</Button>}
-          {step === 4 && <ExportButton cardRef={cardRef} studentName={state.student.name} />}
+          <ExportButton
+            cardRef={cardRef}
+            studentName={state.student.name}
+            onExported={() => dispatch({ type: 'AMBASSADOR_TO_EXPORT' })}
+          />
         </div>
       </section>
     </div>

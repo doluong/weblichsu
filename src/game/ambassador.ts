@@ -15,7 +15,7 @@ export interface AmbassadorErrors {
   summary?: string
 }
 
-// C5: kiểm tra thông tin học sinh, mật mã rỗng, độ dài 30-50 từ. Nếu có lỗi thì thêm thông báo chung,
+// C5: kiểm tra thông tin học sinh, mật mã rỗng, độ dài 10-30 từ. Nếu có lỗi thì thêm thông báo chung,
 // không xóa dữ liệu đã nhập. Chưa so khớp mật mã ở bước này.
 export function validateAmbassador(student: StudentInfo, code: string, action: string): AmbassadorErrors {
   const errors: AmbassadorErrors = {}

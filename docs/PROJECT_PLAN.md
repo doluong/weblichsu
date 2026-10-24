@@ -14,7 +14,7 @@ Website trò chơi giáo dục tiếng Việt, 5 chặng, tổng tối đa 100 �
 1. Giới thiệu: tiêu đề, lời dẫn nguyên văn, nút bắt đầu.
 2. Thông tin học sinh: họ tên, lớp, trường (bắt buộc, kiểm tra trước khi bắt đầu).
 3. Chặng 1: hai ảnh bí ẩn hiển thị cùng lúc; mở ô, chọn đáp án cho cả hai ảnh rồi bấm một nút "Hoàn thành" (chỉ sáng khi mỗi ảnh đã mở ít nhất 1 ô và đã chọn đáp án). Chặng 2-4 mỗi chặng gồm màn chơi, nút hoàn thành (disabled khi chưa đủ điều kiện) và màn kết quả (điểm chặng, thông báo, mảnh mật mã, tổng điểm tạm). Chặng 3 gồm 3 phòng theo thứ tự, mỗi phòng phải trả lời đủ mới hoàn thành, điểm phòng chỉ hiện ở tổng kết chặng. Chỉ mở chặng kế khi chặng hiện tại đã hoàn thành; chặng đã hoàn thành bị khóa.
-4. Chặng 5 (4 bước): (1) thông tin học sinh, cho sửa họ tên/lớp/trường, ảnh chân dung tùy chọn; (2) mật mã và đóng góp bảo tồn 30-50 từ; (3) xem trước: điểm các chặng, lời chúc, thẻ; (4) xuất PNG và tái khởi động. Mật mã sai (sau khi các trường hợp lệ) -> màn hình thất bại một lần, chỉ có nút "Tái khởi động hành trình".
+4. Chặng 5 (4 bước): (1) thông tin học sinh, cho sửa họ tên/lớp/trường, ảnh chân dung tùy chọn; (2) mật mã và đóng góp bảo tồn 10-30 từ; (3) xem trước: điểm các chặng, lời chúc, thẻ, kèm nút "Xuất thẻ" (một lần bấm là xuất PNG); (4) sau khi xuất thành công, thanh bước chuyển sang bước 4; có nút tái khởi động. Mật mã sai (sau khi các trường hợp lệ) -> màn hình thất bại một lần, chỉ có nút "Tái khởi động hành trình".
 5. Thanh tiến trình 5 chặng và bảng mảnh mật mã đã nhận luôn hiển thị; "Tái khởi động" luôn hỏi xác nhận.
 
 ## 3. Cấu trúc thư mục

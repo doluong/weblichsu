@@ -21,19 +21,32 @@ async function reachExportStep(user: User) {
   await user.click(screen.getByLabelText(/Hành động bảo tồn/))
   await user.paste(VALID_ACTION)
   await user.click(screen.getByRole('button', { name: 'Hoàn thành' }))
-  await user.click(screen.getByRole('button', { name: 'Tiếp tục để xuất thẻ' }))
 }
 
-describe('Chặng 5 - xuất thẻ PNG', () => {
+describe('Chặng 5 - xuất thẻ PNG (một nút)', () => {
   beforeEach(() => {
     renderCardPng.mockReset()
     downloadDataUrl.mockReset()
   })
 
-  it('chỉ có nút Xuất thẻ ở Bước 4, không có ở Bước 3', async () => {
+  it('chưa có nút Xuất thẻ khi chưa tạo thẻ (Bước 1)', async () => {
     const user = renderApp()
     await user.click(within(screen.getByLabelText('Xem khung chặng (chế độ phát triển)')).getByRole('button', { name: 'Chặng 5' }))
     expect(screen.queryByRole('button', { name: 'Xuất thẻ' })).not.toBeInTheDocument()
+  })
+
+  it('xuất ngay bằng một lần bấm; thanh bước chuyển sang bước 4 sau khi xuất', async () => {
+    renderCardPng.mockResolvedValue('data:image/png;base64,AAAA')
+    const user = renderApp()
+    await reachExportStep(user)
+    const steps = screen.getByRole('list', { name: '4 bước tạo thẻ' })
+    expect(within(steps).getByText('Xem trước thẻ').closest('li')).toHaveAttribute('aria-current', 'step')
+
+    await user.click(screen.getByRole('button', { name: 'Xuất thẻ' }))
+
+    expect(downloadDataUrl).toHaveBeenCalledTimes(1)
+    expect(within(steps).getByText('Xuất thẻ').closest('li')).toHaveAttribute('aria-current', 'step')
+    expect(screen.getByRole('button', { name: 'Xuất thẻ' })).toBeEnabled()
   })
 
   it('xuất đúng phần tử thẻ (không chứa nút bấm), tải về file PNG tên không dấu', async () => {

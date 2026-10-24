@@ -84,7 +84,7 @@ describe('khung giao diện', () => {
     const dev = screen.getByLabelText('Xem khung chặng (chế độ phát triển)')
     await user.click(within(dev).getByRole('button', { name: 'Chặng 5' }))
     expect(screen.getByRole('heading', { level: 1, name: 'ĐẠI SỨ DI SẢN SỐ' })).toBeInTheDocument()
-    expect(screen.getByText('Không tính điểm')).toBeInTheDocument()
+    expect(screen.getByText('Tạo thẻ', { selector: '.stage__points' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Bước 1: Thông tin Đại sứ' })).toBeInTheDocument()
     expect(screen.getByText(/Sứ mệnh khôi phục bản đồ văn minh/)).toBeInTheDocument()
     expect(screen.getByText(/ghi danh vào Hội đồng Di sản!/)).toBeInTheDocument()

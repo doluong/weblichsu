@@ -38,7 +38,7 @@ export const STEP_TITLES = [
 
 export const FIELD_TEXT = {
   codeLabel: 'Mật mã (in hoa có dấu)',
-  actionLabel: 'Hành động bảo tồn (đề xuất giải pháp thực tế của bản thân, 30-50 từ)',
+  actionLabel: 'Hành động bảo tồn (đề xuất giải pháp thực tế của bản thân, 10-30 từ)',
   suggestionsTitle: 'Gợi ý tham khảo',
 } as const
 

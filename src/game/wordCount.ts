@@ -1,5 +1,5 @@
-export const ACTION_MIN_WORDS = 30
-export const ACTION_MAX_WORDS = 50
+export const ACTION_MIN_WORDS = 10
+export const ACTION_MAX_WORDS = 30
 
 // B22: chuẩn hóa khoảng trắng (NFC, gộp khoảng trắng liên tiếp, cắt đầu/cuối) rồi đếm theo khoảng trắng.
 // Tiếng Việt viết rời từng âm tiết nên mỗi âm tiết được tính là một "từ". Từ có gạch nối (ví dụ "kế-hoạch")
@@ -13,7 +13,7 @@ export function countWords(text: string): number {
   return normalized === '' ? 0 : normalized.split(' ').length
 }
 
-// Từ 30 đến 50 từ, tính cả hai đầu mút.
+// Từ 10 đến 30 từ, tính cả hai đầu mút.
 export function isActionLengthValid(text: string): boolean {
   const words = countWords(text)
   return words >= ACTION_MIN_WORDS && words <= ACTION_MAX_WORDS

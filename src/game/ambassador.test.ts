@@ -15,7 +15,7 @@ import { VALID_ACTION, student } from '../test/actions'
 const words = (count: number) => Array.from({ length: count }, (_, index) => `từ${index}`).join(' ')
 
 describe('kiểm tra hợp lệ Chặng 5 (thứ tự C5)', () => {
-  it('đủ thông tin, mật mã không rỗng và 30-50 từ thì không có lỗi', () => {
+  it('đủ thông tin, mật mã không rỗng và 10-30 từ thì không có lỗi', () => {
     expect(validateAmbassador(student, 'DI SẢN', VALID_ACTION)).toEqual({})
   })
 
@@ -30,12 +30,12 @@ describe('kiểm tra hợp lệ Chặng 5 (thứ tự C5)', () => {
     expect(validateAmbassador(student, '   ', VALID_ACTION).code).toBe('Vui lòng nhập mật mã.')
   })
 
-  it.each([0, 29, 51])('hành động %i từ bị từ chối', (count) => {
+  it.each([0, 9, 31])('hành động %i từ bị từ chối', (count) => {
     const errors = validateAmbassador(student, 'DI SẢN', words(count))
-    expect(errors.action).toBe('Đóng góp bảo tồn cần có từ 30 đến 50 từ.')
+    expect(errors.action).toBe('Đóng góp bảo tồn cần có từ 10 đến 30 từ.')
   })
 
-  it.each([30, 50])('hành động %i từ hợp lệ', (count) => {
+  it.each([10, 30])('hành động %i từ hợp lệ', (count) => {
     expect(validateAmbassador(student, 'DI SẢN', words(count)).action).toBeUndefined()
   })
 

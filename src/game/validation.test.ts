@@ -23,7 +23,7 @@ describe('validation', () => {
   it('thông báo đúng nguyên văn tài liệu quyết định', () => {
     expect(VALIDATION_MESSAGES.studentInfoRequired).toBe('Vui lòng nhập đầy đủ họ và tên, lớp, trường.')
     expect(VALIDATION_MESSAGES.codeRequired).toBe('Vui lòng nhập mật mã.')
-    expect(VALIDATION_MESSAGES.actionLength).toBe('Đóng góp bảo tồn cần có từ 30 đến 50 từ.')
+    expect(VALIDATION_MESSAGES.actionLength).toBe('Đóng góp bảo tồn cần có từ 10 đến 30 từ.')
     expect(VALIDATION_MESSAGES.reviewBeforeCard).toBe('Vui lòng kiểm tra lại thông tin trước khi tạo thẻ.')
   })
 })

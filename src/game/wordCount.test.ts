@@ -38,17 +38,18 @@ describe('đếm từ', () => {
     expect(countWords('Sa\u0309n tồn')).toBe(2)
   })
 
-  it('khoảng 30-50 từ, tính cả hai đầu mút', () => {
-    expect(ACTION_MIN_WORDS).toBe(30)
-    expect(ACTION_MAX_WORDS).toBe(50)
+  it('khoảng 10-30 từ, tính cả hai đầu mút', () => {
+    expect(ACTION_MIN_WORDS).toBe(10)
+    expect(ACTION_MAX_WORDS).toBe(30)
     for (const [count, valid] of [
       [0, false],
       [1, false],
-      [29, false],
+      [9, false],
+      [10, true],
+      [20, true],
       [30, true],
-      [40, true],
-      [50, true],
-      [51, false],
+      [31, false],
+      [50, false],
       [200, false],
     ] as const) {
       expect(isActionLengthValid(words(count)), `${count} từ`).toBe(valid)
@@ -56,7 +57,7 @@ describe('đếm từ', () => {
   })
 
   it('khoảng trắng thừa không làm đủ hay vượt số từ', () => {
-    expect(isActionLengthValid(`   ${words(30)}   `)).toBe(true)
-    expect(isActionLengthValid(words(29).replace(/ /g, '    '))).toBe(false)
+    expect(isActionLengthValid(`   ${words(10)}   `)).toBe(true)
+    expect(isActionLengthValid(words(9).replace(/ /g, '    '))).toBe(false)
   })
 })

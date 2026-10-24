@@ -83,8 +83,9 @@ fieldset:disabled .option {
   touch-action: manipulation;
 }
 
+/* Hover chỉ đổi độ sáng, tuyệt đối không dùng độ trong suốt vì sẽ lộ ảnh phía sau. */
 .mystery__tile:hover:not(:disabled) {
-  opacity: 0.85;
+  filter: brightness(1.12);
 }
 
 .mystery__tile:disabled {
@@ -93,6 +94,7 @@ fieldset:disabled .option {
 
 .mystery__tile.is-open {
   background: transparent;
+  box-shadow: none;
   pointer-events: none;
   opacity: 0;
 }

@@ -93,7 +93,7 @@ describe('Chặng 4 - giao diện', () => {
     // 20 (Chặng 1) + 0 (Chặng 2) + điểm Chặng 3 (đáp án đầu tiên) + 2 + 5 (Chặng 4)
     expect(screen.getByRole('region', { name: 'Kết quả Chặng 4' })).toHaveTextContent(/Tổng điểm hiện tại: [\d,]+\/100/)
     await continueToStage(user, 5)
-    expect(screen.getByText('Không tính điểm')).toBeInTheDocument()
+    expect(screen.getByText('Tạo thẻ', { selector: '.stage__points' })).toBeInTheDocument()
     expect(screen.queryByRole('region', { name: 'Kết quả Chặng 5' })).not.toBeInTheDocument()
   })
 })

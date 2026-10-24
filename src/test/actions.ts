@@ -69,4 +69,4 @@ export function atStage5(perfect = true): GameState {
   return run(playing(), ...fullPlayActions(perfect), { type: 'VIEW_STAGE', stage: 5 })
 }
 
-export const VALID_ACTION = Array.from({ length: 35 }, (_, index) => `ý${index + 1}`).join(' ')
+export const VALID_ACTION = Array.from({ length: 20 }, (_, index) => `ý${index + 1}`).join(' ')

@@ -731,8 +731,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 3px;
-  padding: 3px;
+  /* Không có khe hở hay lề: bốn ô che kín toàn bộ ảnh. */
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
   border-radius: var(--radius-small);
 }
 
@@ -743,7 +745,9 @@
   font-size: 1.8rem;
   font-weight: 700;
   color: rgba(255, 255, 255, 0.9);
-  border-radius: 4px;
+  border-radius: 0;
+  /* Phủ chồng 1 px bằng chính màu của ô để không lộ đường nối do làm tròn điểm ảnh. Phần tràn ra ngoài bị cắt. */
+  box-shadow: 0 0 0 1px var(--tile-color, transparent);
 }
 
 /* Chặng 2 */

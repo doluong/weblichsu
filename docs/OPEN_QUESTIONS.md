@@ -375,3 +375,15 @@ M2.8: Đồng ý
 - M2.7: lời dẫn Chặng 5 đã sửa thành "... chính thức ghi danh vào Hội đồng Di sản!" (bỏ "Bảng Vàng"). Mâu thuẫn với B28 không còn.
 - Xuất PDF: không làm (người dùng đã hủy, thay cho M2.8 "chờ PNG ổn định").
 - Ảnh thật đã thay các ảnh giữ chỗ, đúng tỷ lệ khung. Ảnh nền bảo tàng được dùng làm banner trang trí đầu Phòng 1 (đề xuất của tôi; chờ người dùng xem lại).
+
+## P. Chỉnh sửa theo yêu cầu của người dùng sau khi hoàn thiện
+
+Các thay đổi sau là yêu cầu trực tiếp của người dùng, thay thế các quy tắc cũ tương ứng:
+
+| # | Yêu cầu | Thay thế quy tắc cũ | Cách triển khai |
+|---|---|---|---|
+| P1 | Chặng 1: bỏ hiệu ứng độ trong suốt khi di chuột lên ô che (lộ ảnh phía sau); bốn ô che phải che kín toàn bộ ảnh | Khung cũ có khe hở 3 px và hover `opacity` | Bỏ `gap` và `padding` của lưới ô che; hover chỉ đổi độ sáng (`brightness`), không đổi độ trong suốt; mỗi ô phủ chồng 1 px màu của chính nó để không lộ đường nối |
+| P2 | Chặng 5: hành động bảo tồn từ 10 đến 30 từ | B22, A4: 30-50 từ | `ACTION_MIN_WORDS = 10`, `ACTION_MAX_WORDS = 30`; thông báo B26 đổi thành "Đóng góp bảo tồn cần có từ 10 đến 30 từ."; chữ nhãn và bộ đếm từ đổi theo |
+| P3 | Chặng 5: chỉ bấm một nút "Xuất thẻ" là xuất thẻ | M2.3: Bước 3 có nút "Tiếp tục để xuất thẻ", Bước 4 mới có nút "Xuất thẻ" | Nút "Xuất thẻ" có ngay ở Bước 3, bỏ nút "Tiếp tục để xuất thẻ"; sau khi xuất thành công thanh bước chuyển sang Bước 4 |
+
+Ghi chú: người dùng cũng đã tự commit `ac61e14 "Update text"` đổi chữ chân trang, nhãn "Hành trình khám phá" và nhãn Chặng 5 từ "Không tính điểm" thành "Tạo thẻ"; các test đã được cập nhật cho khớp. Chặng 5 vẫn không cộng điểm.

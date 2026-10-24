@@ -7,9 +7,11 @@ import { downloadDataUrl, renderCardPng } from './exportCard'
 interface ExportButtonProps {
   cardRef: RefObject<HTMLDivElement | null>
   studentName: string
+  // Gọi sau khi xuất thành công (để chuyển thanh bước sang "Xuất thẻ").
+  onExported?: () => void
 }
 
-export function ExportButton({ cardRef, studentName }: ExportButtonProps) {
+export function ExportButton({ cardRef, studentName, onExported }: ExportButtonProps) {
   const [busy, setBusy] = useState(false)
   const [failed, setFailed] = useState(false)
 
@@ -21,6 +23,7 @@ export function ExportButton({ cardRef, studentName }: ExportButtonProps) {
     try {
       const dataUrl = await renderCardPng(node)
       downloadDataUrl(dataUrl, exportFileName(studentName))
+      onExported?.()
     } catch {
       setFailed(true)
     } finally {

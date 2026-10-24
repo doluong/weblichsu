@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { STAGE1_TILE_COLORS } from '../../config/stages'
 import { STAGE1_IMAGES, STAGE1_OPTION_LABELS } from '../../content/stage1'
 import { UI_TEXT } from '../../content/uiText'
@@ -45,7 +46,7 @@ export function Stage1Frame() {
                         key={tile}
                         type="button"
                         className={`mystery__tile ${isOpen ? 'is-open' : ''}`}
-                        style={isOpen ? undefined : { backgroundColor: color }}
+                        style={isOpen ? undefined : ({ backgroundColor: color, '--tile-color': color } as CSSProperties)}
                         disabled={locked || isOpen}
                         aria-label={isOpen ? `Ô ${tile + 1} đã mở` : `Mở ô ${tile + 1}`}
                         onClick={() => dispatch({ type: 'OPEN_TILE', image: imageIndex, tile })}

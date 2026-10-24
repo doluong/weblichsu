@@ -8,7 +8,7 @@ import { Button } from '../common/Button'
 import { TextArea } from '../common/TextArea'
 import { TextField } from '../common/TextField'
 
-// Bước 2: nhập mật mã và hành động bảo tồn (30-50 từ). Gợi ý chỉ để tham khảo, không tự điền sẵn.
+// Bước 2: nhập mật mã và hành động bảo tồn (10-30 từ). Gợi ý chỉ để tham khảo, không tự điền sẵn.
 export function AmbassadorStep2() {
   const { state, dispatch } = useGame()
   const { code, action } = state.ambassador

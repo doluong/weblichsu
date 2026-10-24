@@ -125,12 +125,12 @@ Quyết định (D: B17-B20):
 ## Chặng 5 - Đại sứ Di sản số (không tính điểm)
 
 - Không cộng điểm; hiển thị điểm từng chặng (Chặng 1-4) và tổng điểm; trên thẻ ghi "ĐIỂM SỐ .../100". Không hiển thị điểm cho Chặng 5.
-- Bốn bước (B21): (1) thông tin học sinh (hiển thị giá trị đã nhập, cho sửa họ tên, lớp, trường; ảnh chân dung tùy chọn), (2) mật mã và đóng góp bảo tồn, (3) xem trước thẻ kèm điểm các chặng và lời chúc, (4) xuất thẻ PNG và tái khởi động.
+- Bốn bước (B21): (1) thông tin học sinh (hiển thị giá trị đã nhập, cho sửa họ tên, lớp, trường; ảnh chân dung tùy chọn), (2) mật mã và đóng góp bảo tồn, (3) xem trước thẻ kèm điểm các chặng và lời chúc, (4) xuất thẻ PNG và tái khởi động. Nút "Xuất thẻ" có ngay ở Bước 3 (một lần bấm là xuất); sau khi xuất thành công, thanh bước chuyển sang Bước 4 (OPEN_QUESTIONS mục P).
 - Tiêu đề thẻ: "THẺ ĐẠI SỨ DI SẢN SỐ" (sửa lỗi gõ "ĐẠO SỨ"), phụ đề "VĂN MINH ĐÔNG NAM Á".
 - Mật mã: bỏ khoảng trắng đầu/cuối, gộp khoảng trắng liên tiếp, chuẩn hóa Unicode NFC, không phân biệt hoa/thường, vẫn phân biệt dấu. Mật mã chính xác: `DI SẢN KẾT NỐI TƯƠNG LAI` (B23).
-- Đóng góp bảo tồn: chuẩn hóa khoảng trắng rồi tách theo khoảng trắng; từ 30 đến 50 từ, tính cả hai đầu mút (B22).
-- Thông báo kiểm tra hợp lệ (B26, hiển thị tại trường, không xóa dữ liệu đã nhập): "Vui lòng nhập đầy đủ họ và tên, lớp, trường."; "Vui lòng nhập mật mã."; "Đóng góp bảo tồn cần có từ 30 đến 50 từ."; "Vui lòng kiểm tra lại thông tin trước khi tạo thẻ."
-- Điều kiện tạo thẻ: Chặng 1-4 đã hoàn thành theo luồng chơi, họ tên/lớp/trường hợp lệ, đóng góp 30-50 từ, mật mã đúng. Không yêu cầu thêm điều kiện đã nhận đủ mảnh (tài liệu không nêu).
+- Đóng góp bảo tồn: chuẩn hóa khoảng trắng rồi tách theo khoảng trắng; từ 10 đến 30 từ, tính cả hai đầu mút (B22, đã đổi từ 30-50 theo yêu cầu của người dùng, OPEN_QUESTIONS mục P).
+- Thông báo kiểm tra hợp lệ (B26, hiển thị tại trường, không xóa dữ liệu đã nhập): "Vui lòng nhập đầy đủ họ và tên, lớp, trường."; "Vui lòng nhập mật mã."; "Đóng góp bảo tồn cần có từ 10 đến 30 từ."; "Vui lòng kiểm tra lại thông tin trước khi tạo thẻ."
+- Điều kiện tạo thẻ: Chặng 1-4 đã hoàn thành theo luồng chơi, họ tên/lớp/trường hợp lệ, đóng góp 10-30 từ, mật mã đúng. Không yêu cầu thêm điều kiện đã nhận đủ mảnh (tài liệu không nêu).
 - Lời cảm ơn trên thẻ: tổng điểm đúng 100 dùng lời khen xuất sắc; dưới 100 dùng lời động viên (nguyên văn trong tài liệu).
 - Sai mật mã (B25): không tạo thẻ, hiển thị đúng thông báo thất bại theo tài liệu cùng tổng điểm các chặng, chỉ có nút "Tái khởi động hành trình"; không cho nhập lại trong lượt chơi đó.
 - Đúng mật mã: hiển thị điểm các chặng, "Chúc mừng em đã hoàn thành thử thách đại sứ di sản số", thẻ, nút "Xuất thẻ" (PNG; không xuất PDF) và "Tái khởi động hành trình".

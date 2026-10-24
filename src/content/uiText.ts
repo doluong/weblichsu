@@ -5,7 +5,7 @@ export const VALIDATION_MESSAGES = {
   // OPEN_QUESTIONS B26
   studentInfoRequired: 'Vui lòng nhập đầy đủ họ và tên, lớp, trường.',
   codeRequired: 'Vui lòng nhập mật mã.',
-  actionLength: 'Đóng góp bảo tồn cần có từ 30 đến 50 từ.',
+  actionLength: 'Đóng góp bảo tồn cần có từ 10 đến 30 từ.',
   reviewBeforeCard: 'Vui lòng kiểm tra lại thông tin trước khi tạo thẻ.',
 } as const
 
@@ -73,16 +73,14 @@ export const UI_TEXT = {
   stage5Back: 'Quay lại',
   stage5Submit: 'Hoàn thành',
   stage5Export: 'Xuất thẻ',
-  stage5ToExport: 'Tiếp tục để xuất thẻ',
   stage5AvatarLabel: 'Ảnh chân dung (tùy chọn)',
   stage5AvatarRemove: 'Xóa ảnh',
   stage5AvatarNote: 'Ảnh chỉ được dùng trong trình duyệt của bạn, không được tải lên máy chủ.',
   stage5AvatarError: 'Vui lòng chọn tệp ảnh (JPG, PNG hoặc WebP) nhỏ hơn 5 MB.',
-  stage5WordCount: (count: number) => `Đã nhập ${count} từ (cần từ 30 đến 50 từ).`,
+  stage5WordCount: (count: number) => `Đã nhập ${count} từ (cần từ 10 đến 30 từ).`,
   stage5ScoreTitle: 'Điểm số các chặng',
   stage5Total: 'Tổng điểm',
   stage5PreviewTitle: 'Thẻ Đại sứ Di sản số của bạn',
-  stage5ExportTitle: 'Xuất thẻ',
   stage5ExportHint: 'Thẻ được lưu thành ảnh PNG ngay trên thiết bị của bạn.',
   stage5ExportBusy: 'Đang tạo ảnh...',
   stage5ExportError: 'Không thể xuất thẻ. Vui lòng thử lại.',

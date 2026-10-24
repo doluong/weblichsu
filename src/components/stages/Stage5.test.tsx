@@ -31,7 +31,7 @@ async function toStep2(user: User) {
 
 const CODE_LABEL = 'Mật mã (in hoa có dấu)'
 const ACTION_LABEL = /Hành động bảo tồn/
-const ACTION_FULL = 'Hành động bảo tồn (đề xuất giải pháp thực tế của bản thân, 30-50 từ)'
+const ACTION_FULL = 'Hành động bảo tồn (đề xuất giải pháp thực tế của bản thân, 10-30 từ)'
 
 describe('Chặng 5 - Bước 1', () => {
   it('thiếu thông tin: hiện thông báo tại từng trường, không sang Bước 2', async () => {
@@ -100,7 +100,7 @@ describe('Chặng 5 - Bước 2 và kiểm tra hợp lệ', () => {
     await user.click(screen.getByRole('button', { name: 'Hoàn thành' }))
     const text = screen.getAllByRole('alert').map((alert) => alert.textContent)
     expect(text).toContain('Vui lòng nhập mật mã.')
-    expect(text).toContain('Đóng góp bảo tồn cần có từ 30 đến 50 từ.')
+    expect(text).toContain('Đóng góp bảo tồn cần có từ 10 đến 30 từ.')
     expect(text).toContain('Vui lòng kiểm tra lại thông tin trước khi tạo thẻ.')
   })
 
@@ -114,26 +114,30 @@ describe('Chặng 5 - Bước 2 và kiểm tra hợp lệ', () => {
     expect(screen.getByLabelText(CODE_LABEL)).toHaveValue('')
   })
 
-  it('đếm từ trực tiếp; 29 từ bị từ chối và dữ liệu đã nhập được giữ nguyên', async () => {
+  it('đếm từ trực tiếp; 9 từ bị từ chối và dữ liệu đã nhập được giữ nguyên', async () => {
     const user = renderApp()
     await toStep2(user)
-    const twentyNine = Array.from({ length: 29 }, (_, i) => `a${i}`).join(' ')
-    await setText(user, ACTION_FULL, twentyNine)
+    const nine = Array.from({ length: 9 }, (_, i) => `a${i}`).join(' ')
+    await setText(user, ACTION_FULL, nine)
     await setText(user, CODE_LABEL, CODE)
-    expect(screen.getByText('Đã nhập 29 từ (cần từ 30 đến 50 từ).')).toBeInTheDocument()
+    expect(screen.getByText('Đã nhập 9 từ (cần từ 10 đến 30 từ).')).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: 'Hoàn thành' }))
-    expect(screen.getAllByRole('alert').map((a) => a.textContent)).toContain('Đóng góp bảo tồn cần có từ 30 đến 50 từ.')
-    expect(screen.getByLabelText(ACTION_LABEL)).toHaveValue(twentyNine)
+    expect(screen.getAllByRole('alert').map((a) => a.textContent)).toContain('Đóng góp bảo tồn cần có từ 10 đến 30 từ.')
+    expect(screen.getByLabelText(ACTION_LABEL)).toHaveValue(nine)
     expect(screen.getByLabelText(CODE_LABEL)).toHaveValue(CODE)
   })
 
-  it('51 từ bị từ chối', async () => {
+  it('31 từ bị từ chối, 10 và 30 từ được chấp nhận', async () => {
     const user = renderApp()
     await toStep2(user)
     await setText(user, CODE_LABEL, CODE)
-    await setText(user, 'Hành động bảo tồn (đề xuất giải pháp thực tế của bản thân, 30-50 từ)', Array.from({ length: 51 }, (_, i) => `a${i}`).join(' '))
+    await setText(user, ACTION_FULL, Array.from({ length: 31 }, (_, i) => `a${i}`).join(' '))
     await user.click(screen.getByRole('button', { name: 'Hoàn thành' }))
-    expect(screen.getAllByRole('alert').map((a) => a.textContent)).toContain('Đóng góp bảo tồn cần có từ 30 đến 50 từ.')
+    expect(screen.getAllByRole('alert').map((a) => a.textContent)).toContain('Đóng góp bảo tồn cần có từ 10 đến 30 từ.')
+    await user.clear(screen.getByLabelText(ACTION_LABEL))
+    await setText(user, ACTION_FULL, Array.from({ length: 30 }, (_, i) => `a${i}`).join(' '))
+    await user.click(screen.getByRole('button', { name: 'Hoàn thành' }))
+    expect(screen.getByRole('status')).toHaveTextContent('Chúc mừng em đã hoàn thành thử thách đại sứ di sản số')
   })
 })
 
@@ -142,7 +146,7 @@ describe('Chặng 5 - sai mật mã', () => {
     const user = renderApp()
     await toStep2(user)
     await setText(user, CODE_LABEL, 'DI SAN KET NOI TUONG LAI')
-    await setText(user, 'Hành động bảo tồn (đề xuất giải pháp thực tế của bản thân, 30-50 từ)', VALID_ACTION)
+    await setText(user, ACTION_FULL, VALID_ACTION)
     await user.click(screen.getByRole('button', { name: 'Hoàn thành' }))
 
     expect(screen.getByText(/Cảm ơn Nguyễn Thị Hương đã dấn thân vào chuyến thám hiểm lịch sử cùng cô Thảo!/)).toBeInTheDocument()
@@ -159,7 +163,7 @@ describe('Chặng 5 - sai mật mã', () => {
     const user = renderApp()
     await toStep2(user)
     await setText(user, CODE_LABEL, 'SAI')
-    await setText(user, 'Hành động bảo tồn (đề xuất giải pháp thực tế của bản thân, 30-50 từ)', VALID_ACTION)
+    await setText(user, ACTION_FULL, VALID_ACTION)
     await user.click(screen.getByRole('button', { name: 'Hoàn thành' }))
     const main = screen.getByRole('main')
     await user.click(within(main).getByRole('button', { name: 'Tái khởi động hành trình' }))
@@ -181,7 +185,7 @@ describe('Chặng 5 - đúng mật mã', () => {
     const user = renderApp()
     await toStep2(user)
     await setText(user, CODE_LABEL, '  di sản  kết nối tương lai ')
-    await setText(user, 'Hành động bảo tồn (đề xuất giải pháp thực tế của bản thân, 30-50 từ)', VALID_ACTION)
+    await setText(user, ACTION_FULL, VALID_ACTION)
     await user.click(screen.getByRole('button', { name: 'Hoàn thành' }))
 
     expect(screen.getByRole('status')).toHaveTextContent('Chúc mừng em đã hoàn thành thử thách đại sứ di sản số')
@@ -205,15 +209,15 @@ describe('Chặng 5 - đúng mật mã', () => {
     expect(inCard.getByAltText('Ảnh chân dung')).toHaveAttribute('src', expect.stringContaining('portrait-default-placeholder.jpg'))
   })
 
-  it('sang Bước 4: thẻ vẫn hiển thị và có nút Tái khởi động hành trình', async () => {
+  it('chỉ cần một nút Xuất thẻ: có ngay ở Bước 3, không còn nút "Tiếp tục để xuất thẻ"', async () => {
     const user = renderApp()
     await toStep2(user)
     await setText(user, CODE_LABEL, CODE)
-    await setText(user, 'Hành động bảo tồn (đề xuất giải pháp thực tế của bản thân, 30-50 từ)', VALID_ACTION)
+    await setText(user, ACTION_FULL, VALID_ACTION)
     await user.click(screen.getByRole('button', { name: 'Hoàn thành' }))
-    await user.click(screen.getByRole('button', { name: 'Tiếp tục để xuất thẻ' }))
+    expect(screen.queryByRole('button', { name: 'Tiếp tục để xuất thẻ' })).not.toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Xuất thẻ' })).toBeEnabled()
     expect(document.querySelector('.acard')).not.toBeNull()
-    expect(screen.getByRole('heading', { name: 'Xuất thẻ' })).toBeInTheDocument()
     expect(within(screen.getByRole('main')).getByRole('button', { name: 'Tái khởi động hành trình' })).toBeInTheDocument()
   })
 })
