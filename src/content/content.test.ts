@@ -52,7 +52,7 @@ describe('nội dung Chặng 2', () => {
 
   it('giữ nguyên văn các thẻ, kể cả "Hình thành", "Phát triển", "Chuyển biến"', () => {
     const texts = STAGE2_CARDS.map((card) => card.text)
-    for (const text of ['Hình thành', 'Phát triển', 'Chuyển biến', 'Phù Nam', 'Pagan', 'Thành tựu khoa học – kĩ thuật']) {
+    for (const text of ['Thời kỳ hình thành', 'Thời kỳ phát triển thịnh đạt', 'Thời kỳ chuyển biến và suy thoái', 'Phù Nam', 'Pagan', 'Đạt được nhiều thành tựu khoa học – kĩ thuật']) {
       expect(texts).toContain(text)
     }
   })

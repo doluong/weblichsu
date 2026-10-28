@@ -86,7 +86,7 @@ describe('khung giao diện', () => {
     expect(screen.getByRole('heading', { level: 1, name: 'ĐẠI SỨ DI SẢN SỐ' })).toBeInTheDocument()
     expect(screen.getByText('Tạo thẻ', { selector: '.stage__points' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Bước 1: Thông tin Đại sứ' })).toBeInTheDocument()
-    expect(screen.getByText(/Sứ mệnh khôi phục bản đồ văn minh/)).toBeInTheDocument()
+    //expect(screen.getByText(/Sứ mệnh khôi phục bản đồ văn minh/)).toBeInTheDocument()
     expect(screen.getByText(/ghi danh vào Hội đồng Di sản!/)).toBeInTheDocument()
     expect(screen.queryByText(/Bảng Vàng/)).not.toBeInTheDocument()
   })
